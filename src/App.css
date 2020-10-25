@@ -1,38 +1,149 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgba(0, 0, 0, 0.01);
+  background: url("./assets/backgroundPattern.svg");
+  font-family: "Varela Round", sans-serif !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --brown: rgba(140, 11, 54, 1);
+  --lightblue: rgba(75, 98, 168, 1);
+  --lightgreen: rgba(96, 191, 52, 1);
+  --voilet: rgba(86, 14, 105, 1);
+  --sandal: rgba(240, 205, 86, 1);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+nav {
+  height: 55px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  padding: 0 50px;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+nav .logo {
+  height: 60%;
+}
+nav .nav-button {
+  padding: 8px 20px;
+  outline: none;
+  background: var(--voilet);
+  color: white;
+  border: 1px solid var(--voilet);
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Varela Round", sans-serif !important;
+  transition: 0.2s;
+}
+
+nav .nav-button:hover {
+  color: var(--voilet);
+  background: white;
+}
+
+.banner {
+  height: calc(100vh - 55px);
+  width: 100vw;
+}
+.row {
+  display: flex;
+}
+.col {
+  display: flex;
+  width: 50%;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: column;
 }
 
-.App-link {
-  color: #61dafb;
+.hero-banner {
+  width: 60%;
+  height: 100%;
+}
+h1 {
+  color: var(--voilet);
+}
+.google-sign-button {
+  width: 200px;
+  height: 45px;
+  background: url("./assets/GoogleSignInButton.svg");
+  background-size: 100% 100%;
+  margin-top: auto;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+.google-sign-button:hover {
+  background: url("./assets/GoogleSignInButtonHover.svg");
+  background-size: 100% 100%;
+}
+.signin-banner {
+  text-align: center;
+  padding: 5% 0;
+  justify-content: space-evenly;
+}
+.banner .quote i {
+  color: var(--lightgreen);
+  margin: 0 10px;
+  font-size: 25px;
+}
+.banner .quote {
+  width: 60%;
+  margin-top: auto;
+  font-size: 20px;
+  color: var(--lightblue);
+}
+.fa-quote-right {
+  align-self: flex-end;
+}
+.quote-author {
+  margin-top: 15px;
+  align-items: center;
+}
+.quote-author img {
+  width: 35px;
+  height: 35px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+.quote-author h3::before {
+  content: "- ";
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media only screen and (max-width: 850px) {
+  .banner .quote {
+    width: 80%;
   }
-  to {
-    transform: rotate(360deg);
+}
+@media only screen and (max-width: 550px) {
+  nav {
+    padding: 0 15px;
+  }
+  .banner {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-banner {
+    margin-top: 50px;
+    width: 50%;
+  }
+  .col {
+    width: 100%;
+    height: 100%;
+    gap: 30px;
+  }
+  .banner .quote {
+    width: 80%;
+  }
+  .quote-author {
+    margin: 0;
   }
 }
