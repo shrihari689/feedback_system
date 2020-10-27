@@ -1,0 +1,107 @@
+.banner {
+  height: calc(100vh - 55px);
+  flex: 1;
+  background: url("./assets/backgroundPattern.svg");
+  margin-top: 55px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.row {
+  display: flex;
+}
+.col {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.hero-banner {
+  width: 60%;
+  height: 100%;
+}
+.signin-banner h1 {
+  color: var(--voilet);
+  font-size: 1.5em;
+}
+.google-sign-button {
+  width: 200px;
+  height: 45px;
+  background: url("./assets/GoogleSignInButton.svg");
+  background-size: 100% 100%;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+.google-sign-button:hover {
+  background: url("./assets/GoogleSignInButtonHover.svg");
+  background-size: 100% 100%;
+}
+.signin-banner {
+  text-align: center;
+  padding: 5% 0;
+  justify-content: space-between;
+}
+.quote-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.banner .quote i {
+  color: var(--lightgreen);
+  margin: 0 10px;
+  font-size: 1.5em;
+}
+.banner .quote {
+  width: 60%;
+  margin-bottom: 10px;
+  font-size: 1.3em;
+  color: var(--lightblue);
+}
+.fa-quote-right {
+  align-self: flex-end;
+}
+.quote-author {
+  align-items: center;
+}
+.quote-author img {
+  width: 35px;
+  height: 35px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+.quote-author h3::before {
+  content: "- ";
+}
+
+@media only screen and (max-width: 850px) {
+  .banner .quote {
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 550px) {
+  nav {
+    padding: 0 15px;
+  }
+  .banner {
+    flex-direction: column;
+  }
+  .hero-banner {
+    margin-top: 50px;
+    width: 50%;
+  }
+  .col {
+    width: 100%;
+    height: 100%;
+    gap: 30px;
+  }
+  .banner .quote {
+    width: 80%;
+  }
+  .quote-author {
+    margin: 0;
+  }
+}

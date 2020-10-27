@@ -1,11 +1,11 @@
 import React from 'react';
-import HomePageBanner from './HomePageIntro';
-import NavBar from './NavBar';
+import HomeNavBar from './HomeNavBar';
+import HomePageContainer from './HomePageContainer';
 const HomePage = (props) => {
     return (
         <React.Fragment>
-            <NavBar />
-            <HomePageBanner />
+            <HomeNavBar />
+            <HomePageContainer />
         </React.Fragment>
     );
 }
