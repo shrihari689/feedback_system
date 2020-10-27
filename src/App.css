@@ -49,6 +49,7 @@ nav .nav-button {
   background: var(--voilet);
   color: white;
   height: unset;
+  margin: 0 5px;
   text-decoration: none;
   border: 1px solid var(--voilet);
   border-radius: 5px;
@@ -61,6 +62,18 @@ nav .nav-button:hover {
   color: var(--voilet);
   background: white;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: #ddd;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #bbb;
+  border-radius: 10px;
+}
+
 @media only screen and (max-width: 550px) {
   nav {
     padding: 0 15px;

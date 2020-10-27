@@ -1,4 +1,5 @@
 import "./App.css";
+import "./loader.css";
 import { Redirect, Route, Switch } from "react-router-dom";
 import React from "react";
 import LoginPage from "./components/login/LoginPage";

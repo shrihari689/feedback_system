@@ -6,7 +6,10 @@ const HomeNavBar = (props) => {
     return ( 
         <nav>
             <Link to="/"><img src={bitLogo} className="logo" alt="Bannari Amman Institute of Technology"/></Link>
-            <a href={`mailto:${supportEmail}`} className="nav-button">Support</a>
+            <div>
+                <a href={`mailto:${supportEmail}`} className="nav-button">Support</a>
+                <Link to='/login' className="nav-button">Logout</Link>    
+            </div>
         </nav>  
     );
 }
