@@ -13,7 +13,6 @@ const LoginPageBanner = (props) => {
     },[]);
 
     if(isLoading) return <Loader/>;
-    
     return (
         <div className="row banner">
             <div className="col">
@@ -28,8 +27,7 @@ const LoginPageBanner = (props) => {
                 <div className="quote-col">
                     <p className="row quote">
                         <i class="fa fa-quote-left" aria-hidden="true"></i> I think it’s very important to have a feedback loop, where you’re constantly thinking about what you’ve done and how you could be doing it better. <i class="fa fa-quote-right" aria-hidden="true"></i>
-                    </p>import Loader from './../general/loadingPage';
-
+                    </p> 
                     <div className="row quote-author">
                         <img src={elonMusk} alt="Quote Author"/>
                         <h3>Elon Musk</h3>
