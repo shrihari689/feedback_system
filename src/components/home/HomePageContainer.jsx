@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../../feeds.css';
 import Loader from './../general/loadingPage';
-const HomePageContainer = (props) => {
+import AdminFeedItem from './../general/adminFeedItem';
+import { data } from './../../configs/mainConfigs';
+const HomePageContainer = ({isLoading, onFeedItemClick}) => {
 
-    const [isLoading, setIsLoading] = useState(true);    
-    useEffect(() => {
-        setIsLoading(false);
-    },[]);
+    
+   
     if(isLoading) return <Loader></Loader>;
 
     return (
@@ -14,64 +14,7 @@ const HomePageContainer = (props) => {
             <div className="feed__recentfeeds">
                 <h3>Recent Feeds</h3>
                 <div className="feed__recentList">
-                    <div className="feed__recentItem has_image">
-                        <div className="feed__recentItem__details">
-                            <div className="feed__recentItem__details__title">
-                                My CAMPS is not working! I logged in but not working!
-                                My CAMPS is not working! I logged in but not working!
-                            </div>
-                            <div className="feed__recentItem__details__more">
-                                <div className="feed__recentItem__details__tags">
-                                    <div className="feed__recentItem__details__more__tag">SDC</div>
-                                </div>
-                                <div className="feed__recentItem__details__time">
-                                    <span>25 Oct 2020 7:00 PM</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="feed__recentItem__image">
-                            <img src="https://via.placeholder.com/320x200" alt="Feed"/>
-                        </div>
-                    </div>
-                    
-                    
-
-
-                    <div className="feed__recentItem">
-                        <div className="feed__recentItem__details">
-                            <div className="feed__recentItem__details__title">
-                                I paid the fees, but transaction failed.
-                            </div>
-                            <div className="feed__recentItem__details__more">
-                                <div className="feed__recentItem__details__tags">
-                                    <div className="feed__recentItem__details__more__tag">ADMINISTRATATION</div>
-                                    <div className="feed__recentItem__details__more__tag">SDC</div>
-                                </div>
-                                <div className="feed__recentItem__details__time">
-                                    <span>25 Oct 2020 6:24 PM</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="feed__recentItem has_image solved">
-                        <div className="feed__recentItem__details">
-                            <div className="feed__recentItem__details__title">
-                                Please change online class schedule.
-                            </div>
-                            <div className="feed__recentItem__details__more">
-                                <div className="feed__recentItem__details__tags">
-                                    <div className="feed__recentItem__details__more__tag">MANAGEMENT</div>
-                                </div>
-                                <div className="feed__recentItem__details__time">
-                                    <span>25 Oct 2020 7:00 PM</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="feed__recentItem__image">
-                            <img src="https://via.placeholder.com/320x200" alt="Feed"/>
-                        </div>
-                    </div>
+                    { data.map((e,i)=><AdminFeedItem onFeedItemClick={onFeedItemClick} key={i} {...e} />) }
                 </div>
             </div>
             <div className="feed__feedsfilter">

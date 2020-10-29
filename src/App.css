@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;500;600;700;800;900&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +6,7 @@
 }
 body {
   background-color: rgba(0, 0, 0, 0.01);
-  font-family: "Varela Round", sans-serif !important;
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 16px;
 }
 
@@ -54,7 +54,7 @@ nav .nav-button {
   border: 1px solid var(--voilet);
   border-radius: 5px;
   cursor: pointer;
-  font-family: "Varela Round", sans-serif !important;
+  font-family: "Source Sans Pro", sans-serif;
   transition: 0.2s;
 }
 
