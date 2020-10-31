@@ -1,9 +1,14 @@
 import React from 'react';
-const AdminFeedItem = ({ hasImage, title, tags, status, feedId, onFeedItemClick }) => {
-    
+import { Link } from 'react-router-dom';
+import { getFormatedDateString } from './../../configs/mainConfigs';
+const AdminFeedItem = (props) => {
+    const { hasImage, title, tags, status, feedId, date, userName, userImage } = props.feed;
+
     let feedItemStyle = "feed__recentItem ";
     feedItemStyle += (hasImage ? 'has_image ' : '');
     feedItemStyle += (status != null ? `${status} ` : '');
+
+    const feedDate = getFormatedDateString(new Date(date.seconds * 1000));
 
     const progress = {
         'solved': '100%',
@@ -13,12 +18,11 @@ const AdminFeedItem = ({ hasImage, title, tags, status, feedId, onFeedItemClick 
         'rejected': '100%',
     };
 
-    const handleClick = () => {
-        onFeedItemClick(feedId);
-    };
-
     return (
-        <div onClick={handleClick} className={feedItemStyle}>
+        <Link to={{
+            pathname: `/feed/${feedId}`,
+            state: props.feed
+        }} className={feedItemStyle}>
             <div className="feed__recentItem__details">
                 <div className="feed__recentItem__details__title">
                     {title}
@@ -34,22 +38,22 @@ const AdminFeedItem = ({ hasImage, title, tags, status, feedId, onFeedItemClick 
                     </div>
                 </div>
                 <div className="feed__recentItem__details__profile">
-                    <img src="https://lh3.googleusercontent.com/ogw/ADGmqu93eqcQ9xrcdTbqR2urap4_dXuiRxCCKLF8EEe78Q=s50-c-mo" alt="Profile"/>
-                    <span>Shri Hari L</span>
+                    <img src={userImage} alt="Profile"/>
+                    <span>{userName}</span>
                 </div>
                 <div className="feed__recentItem__details__more">
                     <div className="feed__recentItem__details__tags">
                         {tags && tags.map((e,i) => <div key={i} className="feed__recentItem__details__more__tag">{e.toUpperCase()}</div>)}
                     </div>
                     <div className="feed__recentItem__details__time">
-                        <span>25 Oct 2020 7:00 PM</span>
+                        <span>{feedDate}</span>
                     </div>
                 </div>
             </div>
             {hasImage ? <div className="feed__recentItem__image">
                 <img src={hasImage} alt="Feed"/>
             </div>:''}
-        </div>
+        </Link>
     );
 }
  

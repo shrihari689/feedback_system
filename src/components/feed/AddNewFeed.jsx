@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import HomeNavBar from './../home/HomeNavBar';
 import firebase from 'firebase/app';
+import 'firebase/firebase-firestore';
 import AddNewFeedWrapper from '../general/addNewFeedWrapper';
 const AddNewFeedPage = ({history}) => {
 
     const [isLoading, setIsLoading] = useState(true);    
-    
+    const [currentUser, setCurrentUser] = useState();
+
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {
+                setCurrentUser(user);
                 setIsLoading(false);
             }
         });
@@ -23,7 +26,7 @@ const AddNewFeedPage = ({history}) => {
     const handleLogout = () => {
         setIsLoading(true);
         firebase.default.auth().signOut().then((result)=>{
-            window.location = '/';
+            window.location = '/feeds';
         }).catch((err)=>{
             setIsLoading(false);
             alert("Error in Logging out!");
@@ -31,7 +34,22 @@ const AddNewFeedPage = ({history}) => {
     };
     
     const handleAddNewFeed = (newFeed) => {
-        alert(newFeed);
+        if (currentUser != null) {
+            const dbRef = firebase.firestore().collection('Feeds');
+            const uniqueId = Date.now().toString();
+            dbRef.doc(uniqueId).set({
+                ...newFeed,
+                status: 'unsolved',
+                date: firebase.firestore.FieldValue.serverTimestamp(),
+                userName: currentUser.displayName,
+                userImage: currentUser.photoURL,
+                userId: currentUser.uid 
+            }).then((result) => {
+                window.location.href = '/';
+            }).catch((err)=>{
+                alert("Error in Posting the Feed!\nTry again after sometimes!");
+            });
+        }
     }
 
     return (
@@ -40,7 +58,7 @@ const AddNewFeedPage = ({history}) => {
             <AddNewFeedWrapper
                 onBackButton={handleBackButton}
                 isLoading={isLoading}
-                onAddNewwFeed={handleAddNewFeed}
+                onAddNewFeed={handleAddNewFeed}
             />
         </React.Fragment>
     );

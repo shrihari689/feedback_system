@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import Loader from './loadingPage';
 import '../../feedDetails.css';
+import { getFormatedDateString } from './../../configs/mainConfigs';
+
 const AdminFeedDetailsItem = ({feed, isLoading, onBackButton, onStatusChange}) => {
-    const currentFeed = feed[0];
-    const [newStatus, setNewStatus] = useState('partial') ;
-   
+    const currentFeed = feed;
+    const [newStatus, setNewStatus] = useState(currentFeed.status) ;
+    const feedDate = getFormatedDateString(new Date(currentFeed.date.seconds * 1000));
+
+
     if(isLoading) return <Loader/>;
     return (   
         <div className="feedDetails__container">
@@ -22,12 +26,16 @@ const AdminFeedDetailsItem = ({feed, isLoading, onBackButton, onStatusChange}) =
                     <div className="feedDetails__details__title">
                         {currentFeed.title}
                     </div>
+                    <div className="feedDetails__details__profile__item">
+                        <img src={currentFeed.userImage} alt={`${currentFeed.userName} Profile`}/>
+                        <span>{currentFeed.userName}</span>
+                    </div>
                     <div className="feedDetails__details__more">
                         <div className="feedDetails__details__tags">
                             {currentFeed.tags && currentFeed.tags.map((e,i) => <div key={i} className="feedDetails__details__tag">{e.toUpperCase()}</div>)}
                         </div>
                         <div className="feedDetails__details__date">
-                            <span>25 Oct 2020 7:00 PM</span>
+                            <span>{feedDate}</span>
                         </div>
                     </div>
                     { currentFeed.hasImage ?
@@ -39,7 +47,7 @@ const AdminFeedDetailsItem = ({feed, isLoading, onBackButton, onStatusChange}) =
                         null
                     }
                     <div className="feedDetails__details__desc">
-                        {currentFeed.description}
+                        {currentFeed.desc.split('\n').map((line,i) => <p key={i}>{line}</p>)}
                     </div>
                 </div>
             </div>
@@ -52,7 +60,7 @@ const AdminFeedDetailsItem = ({feed, isLoading, onBackButton, onStatusChange}) =
                         </div>
                     </div>
                     <div className="feedDetails__changeStatus">
-                        <select defaultValue='partial' onChange={({target}) => setNewStatus(target.value)}>
+                        <select defaultValue={currentFeed.status} onChange={({target}) => setNewStatus(target.value)}>
                             <option value="partial">Partial</option>
                             <option value="solved">Solved</option>
                             <option value="rejected">Rejected</option>

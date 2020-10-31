@@ -6,19 +6,25 @@ import 'firebase/auth';
 import 'firebase/database';
 const HomePage = ({history}) => {
     const [isLoading, setIsLoading] = useState(true);    
-    
+    const [feeds, setFeeds] = useState([]);
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {
-                const dbRef = firebase.database().ref();
-                dbRef.child('Users').child(user.uid).update({
-                    name: user.displayName,
-                    image: user.photoURL,
-                    id: user.uid,
-                }).then((task) => {
+                const dbRef = firebase.firestore().collection('Feeds');
+                dbRef.get().then((docs) => {
+                    const result = [];
+                    docs.forEach((e) => {
+                        result.unshift({
+                            feedId: e.id,
+                            ...e.data()
+                        });
+                    });
+                    setFeeds(result);
+                    setIsLoading(false);
                 }).catch((err) => {
-                });    
-                setIsLoading(false);
+                    alert(err);
+                    setIsLoading(null);
+                });
             }
         });
     },[]);
@@ -46,6 +52,7 @@ const HomePage = ({history}) => {
         <React.Fragment>
             <HomeNavBar onLogout={handleLogout} />
             <HomePageContainer
+                feeds={feeds}
                 onFeedItemClick={handleFeedItemClick}
                 isLoading={isLoading}
             />

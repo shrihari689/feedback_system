@@ -68,3 +68,28 @@ export const checkUserSignIn = () => {
     }
   });
 };
+export const getFormatedDateString = (date) => {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "July",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let dateString = "";
+  dateString += date.getDate() + " ";
+  dateString += months[date.getMonth()] + " ";
+  dateString += date.getFullYear() + " | ";
+  dateString +=
+    (date.getHours() > 12 ? date.getHours() - 12 : date.getHours()) + ":";
+  dateString += date.getMinutes() + " ";
+  dateString += date.getHours() > 11 ? "PM" : "AM";
+  return dateString;
+};
