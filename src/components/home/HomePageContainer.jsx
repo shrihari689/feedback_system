@@ -5,7 +5,6 @@ import AdminFeedItem from './../general/adminFeedItem';
 import { data } from './../../configs/mainConfigs';
 const HomePageContainer = ({isLoading, onFeedItemClick}) => {
 
-    
    
     if(isLoading) return <Loader></Loader>;
 

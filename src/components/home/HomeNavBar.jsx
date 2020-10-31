@@ -8,7 +8,7 @@ const HomeNavBar = ({onLogout}) => {
             <Link to="/"><img src={bitLogo} className="logo" alt="Bannari Amman Institute of Technology"/></Link>
             <div>
                 <a href={`mailto:${supportEmail}`} className="nav-button">Support</a>
-                <a href="#!" onClick={onLogout} className="nav-button">Logout</a>    
+                <span onClick={onLogout} className="nav-button">Logout</span>    
             </div>
         </nav>  
     );

@@ -1,4 +1,7 @@
+import firebase from "firebase/app";
+
 export const supportEmail = "shrihari.ct19@bitsathy.ac.in";
+
 export const firebaseConfig = {
   apiKey: "AIzaSyB86IL168LpKedM1R-vDXRp4YbhOari6D0",
   authDomain: "bit-feedback.firebaseapp.com",
@@ -54,3 +57,14 @@ export const data = [
       "Please change online class schedule. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt doloremque blanditiis omnis laborum, dolores consequuntur.",
   },
 ];
+
+export const checkUserSignIn = () => {
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user == null && !window.location.href.includes("/login")) {
+      window.location = "/login";
+    }
+  });
+};

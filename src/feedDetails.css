@@ -21,11 +21,13 @@
 }
 
 .feedDetails__Wrapper {
-  padding: 10px 20px;
+  padding: 30px 20px;
   background: #ffffff;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .feedDetails__detailsWrapper {
@@ -98,11 +100,28 @@
   display: flex;
 }
 .feedDetails__detailsWrapper__header__item {
-  background: var(--lightblue);
+  background-color: #f1cd57;
   padding: 3px 20px;
-  color: #ffffff;
+  color: #111;
   border-radius: 5px 5px 0 0;
   font-size: 0.85em;
+}
+.feedDetails__progress {
+  width: 100%;
+  height: 25px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  background-color: #eee;
+}
+.feedDetails__progress div {
+  height: 100%;
+  display: flex;
+  background-color: #f1cd57;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
 }
 .feedDetails__header i {
   width: 30px;
@@ -116,6 +135,106 @@
   border-radius: 50%;
   margin-right: 10px;
 }
+.feedDetails__changeStatus {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.feedDetails__changeStatus select {
+  flex: 2;
+  padding: 10px;
+  outline: none;
+  font-size: 1.1em;
+  border-radius: 5px;
+  border: 1px solid var(--voilet);
+  min-width: 180px;
+  margin: 10px 10px;
+}
+.feedDetails__changeStatus div {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button {
+  outline: none;
+  padding: 5px 15px;
+  background: var(--voilet);
+  color: white;
+  margin: 0 auto;
+  text-decoration: none;
+  border: 1px solid var(--voilet);
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Source Sans Pro", sans-serif;
+  transition: 0.2s;
+}
+@keyframes solved {
+  0% {
+    color: #ffffff;
+    background: #60bf35;
+    width: 0%;
+    font-size: 0em;
+  }
+  100% {
+    width: 100%;
+    font-size: 1em;
+    color: #ffffff;
+    background: #60bf35;
+  }
+}
+
+@keyframes opened {
+  0% {
+    width: 0%;
+    font-size: 0em;
+  }
+  100% {
+    width: 50%;
+    font-size: 1em;
+  }
+}
+
+@keyframes unsolved {
+  0% {
+    width: 0%;
+    font-size: 0em;
+  }
+  100% {
+    width: 30%;
+    font-size: 0.8em;
+  }
+}
+
+@keyframes rejected {
+  0% {
+    width: 0%;
+    font-size: 0em;
+    background: #e53935;
+    color: white;
+  }
+  100% {
+    width: 100%;
+    font-size: 1em;
+    background: #e53935;
+    color: white;
+  }
+}
+
+@keyframes partial {
+  0% {
+    width: 0%;
+    font-size: 0em;
+  }
+  100% {
+    width: 75%;
+    font-size: 1em;
+  }
+}
+
 @media only screen and (max-width: 720px) {
   .feedDetails__confirmStatus {
     flex: 1;

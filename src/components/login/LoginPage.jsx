@@ -4,7 +4,7 @@ import LoginNavBar from './LoginNavBar';
 import '../../login.css';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-
+import 'firebase/firebase-firestore';
 
 const LoginPage = ({history}) => {
 
@@ -25,9 +25,8 @@ const LoginPage = ({history}) => {
         provider.setCustomParameters({
             'hd': 'bitsathy.ac.in'
         });
-        firebase.default.auth().signInWithPopup(provider).then((result)=>{
+        firebase.auth().signInWithRedirect(provider).then((result)=>{
         }).catch((err)=>{
-            console.log(err);
             alert("Error in Login! Try after sometime!");
             setIsLoading(false);
         });

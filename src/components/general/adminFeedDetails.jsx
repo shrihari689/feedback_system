@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Loader from './loadingPage';
 import '../../feedDetails.css';
-const AdminFeedDetailsItem = ({feed, isLoading, onBackButton}) => {
+const AdminFeedDetailsItem = ({feed, isLoading, onBackButton, onStatusChange}) => {
     const currentFeed = feed[0];
+    const [newStatus, setNewStatus] = useState('partial') ;
+   
     if(isLoading) return <Loader/>;
     return (   
         <div className="feedDetails__container">
             <div className="feedDetails__info">
-                <div class="feedDetails__header">
+                <div className="feedDetails__header">
                     <i onClick={onBackButton} className="fa fa-arrow-left" aria-hidden="true"></i>
                     <h3>Feed Details</h3>
                 </div>
@@ -15,7 +17,6 @@ const AdminFeedDetailsItem = ({feed, isLoading, onBackButton}) => {
                     <div className="feedDetails__detailsWrapper__header__item">
                         #{currentFeed.feedId}
                     </div>
-                    
                 </div>
                 <div className="feedDetails__detailsWrapper">
                     <div className="feedDetails__details__title">
@@ -29,11 +30,14 @@ const AdminFeedDetailsItem = ({feed, isLoading, onBackButton}) => {
                             <span>25 Oct 2020 7:00 PM</span>
                         </div>
                     </div>
-                    { currentFeed.hasImage ? (
-                        <div className="feedDetails__details__image">
-                            <img src={currentFeed.hasImage} alt={`${currentFeed.title} Reference`}/>
-                        </div>
-                    ): null }
+                    { currentFeed.hasImage ?
+                        (
+                            <div className="feedDetails__details__image">
+                                <img src={currentFeed.hasImage} alt={`${currentFeed.title} Reference`}/>
+                            </div>
+                        ):
+                        null
+                    }
                     <div className="feedDetails__details__desc">
                         {currentFeed.description}
                     </div>
@@ -42,7 +46,23 @@ const AdminFeedDetailsItem = ({feed, isLoading, onBackButton}) => {
             <div className="feedDetails__confirmStatus">
                 <h3>Status</h3>
                 <div className="feedDetails__Wrapper">
-
+                    <div className="feedDetails__progress">
+                        <div style={{'animationName': currentFeed.status}}>
+                            {currentFeed.status?.toUpperCase()}
+                        </div>
+                    </div>
+                    <div className="feedDetails__changeStatus">
+                        <select defaultValue='partial' onChange={({target}) => setNewStatus(target.value)}>
+                            <option value="partial">Partial</option>
+                            <option value="solved">Solved</option>
+                            <option value="rejected">Rejected</option>
+                            <option value="unsolved">Unsolved</option>
+                            <option value="opened">Opened</option>
+                        </select>
+                        <div>
+                            <span onClick={() => onStatusChange(currentFeed.feedId, newStatus)} className="button">Confirm</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div> 

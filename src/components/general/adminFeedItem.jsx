@@ -33,6 +33,10 @@ const AdminFeedItem = ({ hasImage, title, tags, status, feedId, onFeedItemClick 
                         </div>
                     </div>
                 </div>
+                <div className="feed__recentItem__details__profile">
+                    <img src="https://lh3.googleusercontent.com/ogw/ADGmqu93eqcQ9xrcdTbqR2urap4_dXuiRxCCKLF8EEe78Q=s50-c-mo" alt="Profile"/>
+                    <span>Shri Hari L</span>
+                </div>
                 <div className="feed__recentItem__details__more">
                     <div className="feed__recentItem__details__tags">
                         {tags && tags.map((e,i) => <div key={i} className="feed__recentItem__details__more__tag">{e.toUpperCase()}</div>)}

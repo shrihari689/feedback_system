@@ -7,12 +7,9 @@ const Loader = () => {
                     <div></div>
                     <div></div>
                     <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
+                </div>            
             </div>
         </div>
     );
 }
- 
 export default Loader;
