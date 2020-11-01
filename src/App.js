@@ -8,6 +8,7 @@ import HomePage from "./components/home/HomePage";
 import { checkUserSignIn, firebaseConfig } from "./configs/mainConfigs";
 import AdminFeedDetailsPage from "./components/feed/AdminFeedDetailsPage";
 import AddNewFeedPage from "./components/feed/AddNewFeed";
+import AdminHelpPage from "./components/help/HelpPage";
 function App() {
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -18,6 +19,7 @@ function App() {
       <Switch>
         <Route path="/login" component={LoginPage}></Route>
         <Route path="/feeds" component={HomePage}></Route>
+        <Route path="/help" component={AdminHelpPage}></Route>
         <Route path="/feed/new" exact component={AddNewFeedPage}></Route>
         <Route path="/feed/:id" component={AdminFeedDetailsPage}></Route>
         <Redirect from="/" to="/login" />

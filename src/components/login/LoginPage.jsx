@@ -26,6 +26,7 @@ const LoginPage = ({history}) => {
             'hd': 'bitsathy.ac.in'
         });
         firebase.auth().signInWithRedirect(provider).then((result)=>{
+            
         }).catch((err)=>{
             alert("Error in Login! Try after sometime!");
             setIsLoading(false);

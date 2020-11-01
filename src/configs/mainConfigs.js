@@ -87,9 +87,19 @@ export const getFormatedDateString = (date) => {
   dateString += date.getDate() + " ";
   dateString += months[date.getMonth()] + " ";
   dateString += date.getFullYear() + " | ";
+  dateString += date.getHours() < 10 ? "0" : "";
   dateString +=
-    (date.getHours() > 12 ? date.getHours() - 12 : date.getHours()) + ":";
-  dateString += date.getMinutes() + " ";
+    (date.getHours() > 12
+      ? date.getHours() - 12 < 10
+        ? "0" + (date.getHours() - 12)
+        : date.getHours() - 12
+      : date.getHours()) + ":";
+  dateString +=
+    (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) +
+    " ";
   dateString += date.getHours() > 11 ? "PM" : "AM";
   return dateString;
 };
+
+export const anonymousImage =
+  "https://firebasestorage.googleapis.com/v0/b/bit-feedback.appspot.com/o/Assets%2FanonymousImage.png?alt=media&token=59de702e-5ed3-4051-9303-a015befe637e";

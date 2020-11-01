@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import Loader from './loadingPage';
 import '../../feedDetails.css';
 import { getFormatedDateString } from './../../configs/mainConfigs';
+import FeedComments from '../feed/FeedComments';
 
-const AdminFeedDetailsItem = ({feed, isLoading, onBackButton, onStatusChange}) => {
+const AdminFeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onStatusChange}) => {
+    const [newStatus, setNewStatus] = useState('partial') ;
     const currentFeed = feed;
-    const [newStatus, setNewStatus] = useState(currentFeed.status) ;
+    
+    if(isLoading || !currentFeed) return <Loader/>;
     const feedDate = getFormatedDateString(new Date(currentFeed.date.seconds * 1000));
-
-
-    if(isLoading) return <Loader/>;
+    
     return (   
         <div className="feedDetails__container">
             <div className="feedDetails__info">
@@ -49,6 +50,10 @@ const AdminFeedDetailsItem = ({feed, isLoading, onBackButton, onStatusChange}) =
                     <div className="feedDetails__details__desc">
                         {currentFeed.desc.split('\n').map((line,i) => <p key={i}>{line}</p>)}
                     </div>
+                </div>
+                <div className="feedDetails__commentsWrapper">
+                    <div className="feedDetails__comments__title">Discussion</div>
+                    <FeedComments currentUser={currentUser} feedId={currentFeed.feedId} />
                 </div>
             </div>
             <div className="feedDetails__confirmStatus">

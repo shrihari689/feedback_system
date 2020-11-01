@@ -54,9 +54,12 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-self: center;
 }
 .feedDetails__details__tags {
   display: flex;
+  align-items: center;
 }
 .feedDetails__details__tag {
   margin-right: 10px;
@@ -187,6 +190,86 @@
   font-family: "Source Sans Pro", sans-serif;
   transition: 0.2s;
 }
+
+.feedDetails__commentsWrapper {
+  padding: 15px 20px;
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.feedDetails__comments__title {
+  font-weight: 600;
+  font-size: 1.3em;
+  margin-bottom: 20px;
+}
+.feedDetails__comment__container {
+  display: grid;
+  grid-template-columns: 50px auto 50px;
+  grid-template-rows: auto;
+  column-gap: 10px;
+  margin: 10px 0;
+}
+.feedDetails__comment__delete:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.feedDetails__comment__delete {
+  align-self: center;
+  text-align: center;
+  cursor: pointer;
+  height: 40px;
+  border-radius: 50%;
+  padding: 10px;
+  width: 40px;
+}
+.feedDetails__comment__image img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.feedDetails__comment__details {
+  display: flex;
+  flex-direction: column;
+}
+.feedDetails__comment__details__name {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.feedDetails__comment__textarea {
+  width: calc(100% - 120px);
+}
+.feedDetails__comment__input textarea {
+  min-height: 50px;
+  max-width: 100%;
+  font-family: "Source Sans Pro", sans-serif;
+  padding: 5px;
+  min-width: 100%;
+  font-size: 1.05em;
+  outline: none;
+}
+.feedDetails__comment__input {
+  display: flex;
+  margin: 10px 0;
+  align-items: center;
+  justify-content: space-between;
+}
+.feedDetails__comment__button .button {
+  padding: 5px 10px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+.feedDetails__comment__button span {
+  font-size: 0.7em;
+  text-align: center;
+}
+.feedDetails__comment__button {
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+}
 @keyframes solved {
   0% {
     color: #ffffff;
@@ -261,6 +344,12 @@
   }
 }
 @media only screen and (max-width: 480px) {
+  .feedDetails__details__more {
+    justify-content: center;
+  }
+  .feedDetails__details__tags {
+    margin-bottom: 5px;
+  }
 }
 @media only screen and (max-width: 400px) {
   .feedDetails__info {

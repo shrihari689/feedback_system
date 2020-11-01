@@ -1,0 +1,40 @@
+.help__container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  margin-top: 75px;
+}
+.help__container__wrapper {
+  width: 80%;
+  background-color: white;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.05);
+  height: 100%;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.help__container__title {
+  margin: 20px;
+}
+.help__container__questions__list {
+  display: flex;
+  flex-direction: column;
+}
+.help__question {
+  margin: 10px 15px;
+  padding: 5px 10px;
+}
+.help__question__title {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+@media only screen and (max-width: 500px) {
+  .help__container__wrapper {
+    width: 90%;
+  }
+  .help__container__title {
+    text-align: center;
+  }
+}

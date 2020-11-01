@@ -2,18 +2,36 @@ import React, { useEffect, useState } from 'react';
 import AdminFeedDetailsItem from '../general/adminFeedDetails';
 import HomeNavBar from '../home/HomeNavBar';
 import firebase  from 'firebase/app';
-const AdminFeedDetailsPage = ({history, location}) => {
+import 'firebase/firebase-firestore';
+
+const AdminFeedDetailsPage = ({history, match}) => {
     const [isLoading, setIsLoading] = useState(true);  
-    const [currentFeed, setCurrentFeed] = useState(location.state);
+    const [currentFeed, setCurrentFeed] = useState({});
+    const [currentUser, setCurrentUser] = useState({});
+    const feedId = match.params.id;
+    
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {
-                setIsLoading(false);
+                const dbRef = firebase.firestore().collection('Feeds').doc(feedId);
+                dbRef.get().then((doc) => {
+                    if(doc.exists){
+                        setCurrentFeed({
+                            feedId: doc.id,
+                            ...doc.data()
+                        });
+                        setIsLoading(false);
+                    }else{
+                        window.location.href = '/feeds';
+                    }
+                }).catch((err) => {
+                    alert("Error in Getting Data!");
+                    setIsLoading(false);
+                });
+                setCurrentUser(user);
             }
         });
-    },[]);
-    
-    if(!currentFeed) window.location.href = '/';
+    },[feedId]);
 
     const handleBackButton = () => {
         history.goBack();
@@ -36,7 +54,6 @@ const AdminFeedDetailsPage = ({history, location}) => {
         dbRef.update({
             status: status
         }).then((result) => {
-            
             if(status === 'solved' || status === 'rejected') {
                 history.replace('/feeds');
             }else{
@@ -44,17 +61,21 @@ const AdminFeedDetailsPage = ({history, location}) => {
                     return {...prev, status: status};
                 });
                 setIsLoading(false);
+                
             }
         }).catch((err) => {
             alert("Error in Updating the Status!");
+            setIsLoading(false);
         });
     };
+
     return (
         <React.Fragment>
             <HomeNavBar onLogout={handleLogout}/>
             <AdminFeedDetailsItem
                 onBackButton={handleBackButton}
                 feed={currentFeed}
+                currentUser={currentUser}
                 onStatusChange={handleChangeStatus}
                 isLoading={isLoading}
             />

@@ -3,12 +3,28 @@ import Loader from './loadingPage';
 import '../../addNewFeed.css';
 const AddNewFeedWrapper = ({onBackButton, onAddNewFeed, isLoading}) => {
 
-    const [addNewFeedData, setAddNewFeedData] = useState({});
+    const [addNewFeedData, setAddNewFeedData] = useState({
+        title: '',
+        desc: '',
+        agree: false,
+        anonymous: false
+    });
     const [newFeedTags, setNewFeedTags] = useState([]);
 
     const tagDepartments = ['Academics', 'Administration', 'Examination', 'Food', 'Hostel', 'Infrastructure', 'Placement', 'Rewards', 'SDC-CAMPS', 'Skills', 'Special Lab', 'Transport'];
     
     const handleOnSubmit = () => {
+
+        if(!addNewFeedData['title'].trim()){
+            alert("Enter a valid title!");
+            return;
+        }else if(!addNewFeedData['desc'].trim()){
+            alert("Enter a valid description!");
+            return;
+        }else if(!addNewFeedData['agree']){
+            alert("Oops! You didn't agree to terms!")
+            return;
+        }
         const feedData = {
             ...addNewFeedData,
             tags: newFeedTags
@@ -81,11 +97,24 @@ const AddNewFeedWrapper = ({onBackButton, onAddNewFeed, isLoading}) => {
                 <h3>Confirm Details</h3>
                 <div className="addNewFeed__PostWrapper">
                     <div className="addNewFeed__confirm__item">
-                        <input type="checkbox" name="addNewFeed_confirm" id="addNewFeed__privacy"/>
+                        <input type="checkbox"
+                            name="addNewFeed_confirm"
+                            onClick={(event) => {
+                                setAddNewFeedData((prev) => {
+                                    return {...prev, anonymous: event.target.checked};
+                                });
+                            }}
+                            id="addNewFeed__privacy"/>
                         <label htmlFor="addNewFeed__privacy">Make this feed as Anonymous</label>
                     </div>
                     <div className="addNewFeed__confirm__item">
-                        <input type="checkbox" name="addNewFeed_confirm" id="addNewFeed__terms"/>
+                        <input type="checkbox" name="addNewFeed_confirm"
+                            onClick={(event) => {
+                                setAddNewFeedData((prev) => {
+                                    return {...prev, agree: event.target.checked};
+                                });
+                            }}
+                            id="addNewFeed__terms"/>
                         <label htmlFor="addNewFeed__terms">I hereby declare that the above mentioned information is correct to the best of my knowledge and I bear the responsibility for the correctness of the above mentioned particulars.</label>
                     </div>
                     <div className="addNewFeed__confirm__button">

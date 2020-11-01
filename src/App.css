@@ -36,9 +36,38 @@ nav {
   background: #ffffff;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 }
-
+.sidebar__container ul {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.sidebar__container ul a:hover {
+  background-color: #eee;
+}
+.sidebar__container ul a {
+  width: 100%;
+  color: #111;
+  text-decoration: none;
+  text-align: center;
+  padding: 15px 0;
+}
+nav ul {
+  display: flex;
+  justify-content: space-evenly;
+  min-width: 250px;
+  margin-right: auto;
+  margin-left: 20px;
+}
+nav ul .active {
+  font-weight: 600;
+  box-sizing: content-box;
+  border-bottom: 3px solid var(--lightblue);
+}
 nav a {
+  color: var(--voilet);
   height: 60%;
+  text-decoration: none;
 }
 nav .logo {
   height: 100%;
@@ -63,6 +92,77 @@ nav .nav-button:hover {
   background: white;
 }
 
+nav .mobile-menu:hover {
+  background-color: #eee;
+}
+nav .mobile-menu {
+  display: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  color: var(--voilet);
+}
+.hidden {
+  visibility: hidden !important;
+}
+.sidebar {
+  position: absolute;
+  top: 0;
+  z-index: 9999;
+  left: 0;
+  display: none;
+  height: 100%;
+  transform: display 0.3s;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+.sidebar.open {
+  display: block;
+}
+.sidebar__container.open {
+  transform: translateX(0%);
+}
+.sidebar__container {
+  width: 300px;
+  background-color: white;
+  height: 100%;
+  position: absolute;
+  padding: 10px 0;
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+  transition-delay: 0.3s;
+}
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: white;
+  cursor: pointer;
+  font-size: 2em;
+}
+.sidebar__button {
+  outline: none;
+  padding: 15px 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  background: var(--voilet);
+  color: white;
+  display: block;
+  text-align: center;
+  width: 90%;
+  margin: 0 5%;
+  margin-bottom: 10px;
+  text-decoration: none;
+  border: 1px solid var(--voilet);
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Source Sans Pro", sans-serif;
+  transition: 0.2s;
+}
+.sidebar__button:hover {
+  color: var(--voilet);
+  background-color: white;
+}
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -77,5 +177,21 @@ nav .nav-button:hover {
 @media only screen and (max-width: 550px) {
   nav {
     padding: 0 15px;
+  }
+}
+@media only screen and (max-width: 700px) {
+  nav .nav-button,
+  nav ul {
+    display: none;
+  }
+  nav .mobile-menu {
+    display: block;
+  }
+  nav a {
+    flex: 1;
+    display: flex;
+  }
+  nav a img {
+    margin: 0 auto;
   }
 }

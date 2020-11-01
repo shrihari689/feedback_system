@@ -9,7 +9,7 @@ const HomePage = ({history}) => {
     const [feeds, setFeeds] = useState([]);
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
-            if (user != null) {
+            if (user != null) {    
                 const dbRef = firebase.firestore().collection('Feeds');
                 dbRef.get().then((docs) => {
                     const result = [];
@@ -29,7 +29,7 @@ const HomePage = ({history}) => {
         });
     },[]);
    
-   
+
     const handleLogout = () => {
         setIsLoading(true);
         firebase.default.auth().signOut().then((result)=>{

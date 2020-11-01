@@ -3,6 +3,7 @@ import HomeNavBar from './../home/HomeNavBar';
 import firebase from 'firebase/app';
 import 'firebase/firebase-firestore';
 import AddNewFeedWrapper from '../general/addNewFeedWrapper';
+import { anonymousImage } from '../../configs/mainConfigs';
 const AddNewFeedPage = ({history}) => {
 
     const [isLoading, setIsLoading] = useState(true);    
@@ -20,7 +21,7 @@ const AddNewFeedPage = ({history}) => {
 
 
     const handleBackButton = () => {
-        window.location.href = '/';
+        history.replace('/feeds');
     }
    
     const handleLogout = () => {
@@ -34,21 +35,27 @@ const AddNewFeedPage = ({history}) => {
     };
     
     const handleAddNewFeed = (newFeed) => {
+        setIsLoading(true);
         if (currentUser != null) {
             const dbRef = firebase.firestore().collection('Feeds');
             const uniqueId = Date.now().toString();
             dbRef.doc(uniqueId).set({
-                ...newFeed,
+                title: newFeed.title,
+                desc: newFeed.desc,
+                tags: newFeed.tags,
                 status: 'unsolved',
                 date: firebase.firestore.FieldValue.serverTimestamp(),
-                userName: currentUser.displayName,
-                userImage: currentUser.photoURL,
+                userName: newFeed.anonymous ? 'Anonymous' : currentUser.displayName,
+                userImage: newFeed.anonymous ? anonymousImage : currentUser.photoURL,
                 userId: currentUser.uid 
             }).then((result) => {
-                window.location.href = '/';
+                window.location.href = '/feeds';
             }).catch((err)=>{
                 alert("Error in Posting the Feed!\nTry again after sometimes!");
+                setIsLoading(false);
             });
+        }else{
+            setIsLoading(false);
         }
     }
 
