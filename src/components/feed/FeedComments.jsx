@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import firebase  from 'firebase/app';
 import 'firebase/firebase-firestore';
+import { getFormatedDateString } from './../../configs/mainConfigs';
+import Loader from './../general/loadingPage';
 const FeedComments = ({feedId, currentUser}) => {
     
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const dbRef = firebase.firestore().collection('Feeds').doc(feedId).collection('Comments');
@@ -14,6 +17,7 @@ const FeedComments = ({feedId, currentUser}) => {
                result.unshift({commentId: e.id, ...e.data()});
             });
             setComments(result);
+            setIsLoading(false);
         }).catch((err) => {
             alert("Error in Loading Comments");
         });
@@ -21,8 +25,11 @@ const FeedComments = ({feedId, currentUser}) => {
         const unsubscribe = dbRef.onSnapshot((snapshot) => {
             snapshot.docChanges().forEach(function(change) {
                 if (change.type === "added") {
-                    const comment =  {commentId: change.doc.id, ...change.doc.data()};
+                    const comment =  {commentId: change.doc.id, ...change.doc.data({serverTimestamps:'estimate'})};
                     setComments((prev) => [comment, ...prev]);
+                }else if(change.type === 'removed'){
+                    const comment =  {commentId: change.doc.id};
+                    setComments((prev) => prev.filter((item) => item.commentId !== comment.commentId));
                 }
             });
         });
@@ -32,12 +39,15 @@ const FeedComments = ({feedId, currentUser}) => {
     },[feedId]);
     
 
+
+
     const handleAddNewComment = () => {
         const newCommentValue = newComment.trim();
         if(newCommentValue !== '' && currentUser != null){       
             setNewComment('');
             const dbRef = firebase.firestore().collection('Feeds').doc(feedId).collection('Comments');
             dbRef.add({
+                date: firebase.firestore.FieldValue.serverTimestamp(),
                 userName: currentUser.displayName,
                 userImage: currentUser.photoURL,
                 userId: currentUser.uid,
@@ -59,21 +69,19 @@ const FeedComments = ({feedId, currentUser}) => {
         
         const dbRef = firebase.firestore().collection('Feeds').doc(feedId).collection('Comments');
         dbRef.doc(commentId).delete().then((result) => {
-            const newComments = comments.filter((e) => e.commentId !== commentId);
-            setComments(newComments);
         }).catch((err) => {
             alert("Error in Deleting the Comment!");
         });
     }
 
     
-
+    if(isLoading) return <div className="feed__comments__loading"><Loader /></div>;
     
     return (
         <React.Fragment>
             <div id="feedDetails__comment__view" className="feedDetails__comment__input">
                 <div className="feedDetails__comment__image">
-                    <img src='https://lh3.googleusercontent.com/a-/AOh14GhinDC_5_G9VLzmIbRW5L0d8f6w6Kg92VxIKWSu=s96-c' alt="Profile"/>
+                    <img src={currentUser.photoURL} alt="Profile"/>
                 </div>
                 <div className="feedDetails__comment__textarea">
                     <textarea
@@ -91,7 +99,7 @@ const FeedComments = ({feedId, currentUser}) => {
                 </div>
             </div>
             {
-                comments.map((e, i) => {
+                comments.sort((a, b) => b.date?.seconds - a.date?.seconds).map((e, i) => {
                     return (
                         <div key={i} className="feedDetails__comment__container">
                             <div className="feedDetails__comment__image">
@@ -100,14 +108,19 @@ const FeedComments = ({feedId, currentUser}) => {
                             <div className="feedDetails__comment__details">
                                 <div className="feedDetails__comment__details__name">
                                     {e.userName}
+                                    <span>{getFormatedDateString(new Date(e.date?.seconds * 1000))}</span>
                                 </div>
                                 <div className="feedDetails__comment__details__info">
                                     {e.message}
                                 </div>
                             </div>
-                            <div onClick={() => handleDeleteComment(e.commentId)} className="feedDetails__comment__delete">
-                                <i className="fa fa-trash"></i>
-                            </div>
+                            {
+                                e.userId === currentUser.uid ? (
+                                    <div onClick={() => handleDeleteComment(e.commentId)} className="feedDetails__comment__delete">
+                                        <i className="fa fa-trash"></i>
+                                    </div>
+                                ): null
+                            }
                         </div>
                     );
                 })

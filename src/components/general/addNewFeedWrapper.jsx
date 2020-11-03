@@ -21,7 +21,11 @@ const AddNewFeedWrapper = ({onBackButton, onAddNewFeed, isLoading}) => {
         }else if(!addNewFeedData['desc'].trim()){
             alert("Enter a valid description!");
             return;
-        }else if(!addNewFeedData['agree']){
+        }else if(newFeedTags.length > 2){
+            alert("Choose only max of 2 departments!");
+            return;
+        }
+        else if(!addNewFeedData['agree']){
             alert("Oops! You didn't agree to terms!")
             return;
         }
@@ -71,15 +75,15 @@ const AddNewFeedWrapper = ({onBackButton, onAddNewFeed, isLoading}) => {
                                         <div key={e} className="addNewFeed__form__option__item">
                                             <input onChange={
                                                 (event) => {
-                                                    setNewFeedTags((prev) => {
-                                                        const newTags = prev;
-                                                        if(event.target.checked){
-                                                            newTags.push(e.toLowerCase());
-                                                            return newTags;
-                                                        }else{
-                                                            return newTags.filter((a) => a !== e.toLowerCase());
-                                                        }
-                                                    });
+                                                        setNewFeedTags((prev) => {
+                                                            const newTags = prev;
+                                                            if(event.target.checked){
+                                                                newTags.push(e.toLowerCase());
+                                                                return newTags;
+                                                            }else{
+                                                                return newTags.filter((a) => a !== e.toLowerCase());
+                                                            }
+                                                        });
                                                 }
                                             }
                                             type="checkbox" id={e.toLowerCase()} name="addNewFeed_tag"/>
@@ -119,7 +123,7 @@ const AddNewFeedWrapper = ({onBackButton, onAddNewFeed, isLoading}) => {
                     </div>
                     <div className="addNewFeed__confirm__button">
                         <span onClick={handleOnSubmit} className="button">Post</span>
-                        <span className="button">Cancel</span>
+                        <span onClick={onBackButton} className="button">Cancel</span>
                     </div>
                     
                 </div>

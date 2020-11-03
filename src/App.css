@@ -59,6 +59,9 @@ nav ul {
   margin-right: auto;
   margin-left: 20px;
 }
+nav ul a {
+  padding: 5px 0;
+}
 nav ul .active {
   font-weight: 600;
   box-sizing: content-box;

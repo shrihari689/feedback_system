@@ -83,17 +83,22 @@ export const getFormatedDateString = (date) => {
     "Nov",
     "Dec",
   ];
+
   let dateString = "";
   dateString += date.getDate() + " ";
   dateString += months[date.getMonth()] + " ";
   dateString += date.getFullYear() + " | ";
-  dateString += date.getHours() < 10 ? "0" : "";
-  dateString +=
-    (date.getHours() > 12
-      ? date.getHours() - 12 < 10
-        ? "0" + (date.getHours() - 12)
-        : date.getHours() - 12
-      : date.getHours()) + ":";
+  if (date.getHours() === 0) {
+    dateString += "12:";
+  } else {
+    dateString += date.getHours() < 10 ? "0" : "";
+    dateString +=
+      (date.getHours() > 12
+        ? date.getHours() - 12 < 10
+          ? "0" + (date.getHours() - 12)
+          : date.getHours() - 12
+        : date.getHours()) + ":";
+  }
   dateString +=
     (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) +
     " ";

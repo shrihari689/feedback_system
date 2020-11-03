@@ -43,7 +43,7 @@ const AdminFeedItem = (props) => {
                 </div>
                 <div className="feed__recentItem__details__more">
                     <div className="feed__recentItem__details__tags">
-                        {tags && tags.map((e,i) => <div key={i} className="feed__recentItem__details__more__tag">{e.toUpperCase()}</div>)}
+                        {tags && tags.sort().map((e,i) => <div key={i} className="feed__recentItem__details__more__tag">{e.toUpperCase()}</div>)}
                     </div>
                     <div className="feed__recentItem__details__time">
                         <span>{feedDate}</span>
