@@ -160,7 +160,64 @@
   color: var(--voilet);
   background: white;
 }
-
+.feed__file__upload {
+  display: none;
+}
+.feed__file__chosen .remove {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  color: white;
+  font-size: 0.8em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  background-color: var(--voilet);
+  width: 20px;
+  border-radius: 50%;
+}
+.feed__file__chosen img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.feed__file__chosen__container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  padding: 10px 0;
+  flex-wrap: wrap;
+}
+.feed__file__chosen {
+  height: 80px;
+  position: relative;
+  width: 80px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+.feed__file__upload__button:hover {
+  background-color: var(--voilet);
+  color: #ffffff;
+}
+.feed__file__upload__button {
+  height: 80px;
+  width: 80px;
+  font-size: 2em;
+  color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 5px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  justify-content: center;
+}
 @media only screen and (max-width: 720px) {
   .addNewFeed__confirmPost {
     flex: 1;

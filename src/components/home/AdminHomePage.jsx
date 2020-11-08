@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import HomeNavBar from './HomeNavBar';
-import HomePageContainer from './AdminHomePageContainer';
+import AdminHomePageContainer from './AdminHomePageContainer';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
@@ -51,7 +51,7 @@ const AdminFeedsPage = ({history}) => {
     return (
         <React.Fragment>
             <HomeNavBar onLogout={handleLogout} />
-            <HomePageContainer
+            <AdminHomePageContainer
                 feeds={feeds}
                 onFeedItemClick={handleFeedItemClick}
                 isLoading={isLoading}

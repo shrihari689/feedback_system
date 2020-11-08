@@ -4,7 +4,7 @@ import '../../feedDetails.css';
 import { getFormatedDateString } from './../../configs/mainConfigs';
 import FeedComments from '../feed/FeedComments';
 
-const AdminFeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onStatusChange}) => {
+const FeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onStatusChange}) => {
     const [newStatus, setNewStatus] = useState('partial') ;
     const currentFeed = feed;
     
@@ -89,4 +89,4 @@ const AdminFeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onSta
     );
 }
  
-export default AdminFeedDetailsItem;
+export default FeedDetailsItem;

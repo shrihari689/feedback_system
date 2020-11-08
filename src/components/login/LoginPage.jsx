@@ -8,25 +8,16 @@ import 'firebase/firebase-firestore';
 
 const LoginPage = ({history}) => {
 
-    const [isLoading, setIsLoading] = useState(true);      
-    const auth = firebase.default.auth();
-    
-    auth.onAuthStateChanged((user) => {
-        if(user){
-            history.replace('/feeds');
-        }else{
-            setIsLoading(false);
-        }
-    });
-    
+    const [isLoading, setIsLoading] = useState(false);      
+  
     const handleLoginUser = () => {
         setIsLoading(true);
-        const provider = new firebase.default.auth.GoogleAuthProvider();
+        const provider = new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({
-            'hd': 'bitsathy.ac.in'
+            'hd': 'bitsathy.ac.in',
         });
         firebase.auth().signInWithRedirect(provider).then((result)=>{
-            
+            setIsLoading(false);
         }).catch((err)=>{
             alert("Error in Login! Try after sometime!");
             setIsLoading(false);

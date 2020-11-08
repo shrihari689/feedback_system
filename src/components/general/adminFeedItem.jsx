@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getFormatedDateString } from './../../configs/mainConfigs';
+import { backend, getFormatedDateString } from './../../configs/mainConfigs';
 const AdminFeedItem = (props) => {
     const { hasImage, title, tags, status, feedId, date, userName, userImage } = props.feed;
 
     let feedItemStyle = "feed__recentItem ";
-    feedItemStyle += (hasImage ? 'has_image ' : '');
+    feedItemStyle += (hasImage && (hasImage.length > 0) ? 'has_image ' : '');
     feedItemStyle += (status != null ? `${status} ` : '');
 
     const feedDate = getFormatedDateString(new Date(date.seconds * 1000));
@@ -50,8 +50,8 @@ const AdminFeedItem = (props) => {
                     </div>
                 </div>
             </div>
-            {hasImage ? <div className="feed__recentItem__image">
-                <img src={hasImage} alt="Feed"/>
+            {hasImage && hasImage.length > 0 ? <div className="feed__recentItem__image">
+                <img src={`http://${backend}:3001/uploads/${hasImage[0]}`} alt="Feed"/>
             </div>:''}
         </Link>
     );

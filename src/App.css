@@ -31,6 +31,7 @@ nav {
   display: flex;
   padding: 0 50px;
   position: fixed;
+  z-index: 99999;
   align-items: center;
   justify-content: space-between;
   background: #ffffff;

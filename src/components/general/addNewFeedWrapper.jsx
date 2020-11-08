@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import Loader from './loadingPage';
 import '../../addNewFeed.css';
+import axios from 'axios';
+import AddNewFeedFileUpload from './fileUpload';
+import { backend } from '../../configs/mainConfigs';
+
+
 const AddNewFeedWrapper = ({onBackButton, onAddNewFeed, isLoading}) => {
+
+    const [files, setFiles] = useState([]);
+    const [sources, setSources] = useState([]);
 
     const [addNewFeedData, setAddNewFeedData] = useState({
         title: '',
@@ -13,6 +21,7 @@ const AddNewFeedWrapper = ({onBackButton, onAddNewFeed, isLoading}) => {
 
     const tagDepartments = ['Academics', 'Administration', 'Examination', 'Food', 'Hostel', 'Infrastructure', 'Placement', 'Rewards', 'SDC-CAMPS', 'Skills', 'Special Lab', 'Transport'];
     
+    
     const handleOnSubmit = () => {
 
         if(!addNewFeedData['title'].trim()){
@@ -21,19 +30,53 @@ const AddNewFeedWrapper = ({onBackButton, onAddNewFeed, isLoading}) => {
         }else if(!addNewFeedData['desc'].trim()){
             alert("Enter a valid description!");
             return;
-        }else if(newFeedTags.length > 2){
-            alert("Choose only max of 2 departments!");
+        }else if(newFeedTags.length === 0){
+            alert("Choose at least 1 department!");
+            return;
+        }else if(newFeedTags.length > 3){
+            alert("Choose only max of 3 departments!");
+            return;
+        }else if(files.length > 3){
+            alert("Only Maximum of 3 files are allowed");
             return;
         }
         else if(!addNewFeedData['agree']){
             alert("Oops! You didn't agree to terms!")
             return;
         }
-        const feedData = {
-            ...addNewFeedData,
-            tags: newFeedTags
-        };
-        onAddNewFeed(feedData);
+        
+        if(files.length > 0){
+            const form = new FormData();
+            for (const key of Object.keys(files)) {
+                console.log(files[key]);
+                form.append('feed_image', files[key])
+            }
+            axios.post(`http://${backend}:3001/api/upload`, form).then((response) => {
+                if(response.status === 201){
+                    const imageData = [];
+                    response.data.forEach((image) => {
+                        imageData.push(image.filename);
+                    });
+                    const feedData = {
+                        ...addNewFeedData,
+                        tags: newFeedTags,
+                        hasImage: imageData
+                    };
+                    onAddNewFeed(feedData);
+                }else{
+                    alert(response.data);        
+                }
+            }).catch((err) => {
+                alert("Client Error: " + err);
+            });
+        }else{
+            const feedData = {
+                ...addNewFeedData,
+                tags: newFeedTags,
+                hasImage: []
+            };
+            onAddNewFeed(feedData);
+        }
     };
 
     if(isLoading) return <Loader />;
@@ -94,6 +137,16 @@ const AddNewFeedWrapper = ({onBackButton, onAddNewFeed, isLoading}) => {
                                 }
                             </div>
                         </div>
+                        <div className="addNewFeed__form__item addNewFeed__upload__images">
+                            <label>Related Images</label>
+                            <span>Max. of 3 images (Only .jpg and .png files)</span>
+                            <AddNewFeedFileUpload
+                                sources={sources}
+                                files={files}
+                                setFiles={setFiles}
+                                setSources={setSources}
+                            />
+                        </div>
                     </form>
                 </div>
             </div>
@@ -125,7 +178,6 @@ const AddNewFeedWrapper = ({onBackButton, onAddNewFeed, isLoading}) => {
                         <span onClick={handleOnSubmit} className="button">Post</span>
                         <span onClick={onBackButton} className="button">Cancel</span>
                     </div>
-                    
                 </div>
             </div>
         </div>

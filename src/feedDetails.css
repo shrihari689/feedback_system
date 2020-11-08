@@ -81,14 +81,16 @@
 }
 .feedDetails__details__image img {
   object-fit: contain;
-  width: 100%;
+  max-width: 100%;
+  max-height: 800px;
+  margin-bottom: 15px;
 }
 
 .feedDetails__details__image {
   cursor: zoom-in;
   width: 100%;
   display: flex;
-  max-height: 500px;
+  flex-direction: column;
   justify-content: center;
   margin-bottom: 20px;
 }

@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import HomeNavBar from './HomeNavBar';
-import HomePageContainer from './AdminHomePageContainer';
+import HomePageContainer from './HomePageContainer';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
-const AdminFeedsPage = ({history}) => {
+const FeedsPage = ({history}) => {
     const [isLoading, setIsLoading] = useState(true);    
     const [feeds, setFeeds] = useState([]);
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {    
                 const dbRef = firebase.firestore().collection('Feeds');
-                dbRef.get().then((docs) => {
+                dbRef.where('userId','==',user.uid)
+                    .get().then((docs) => {
                     const result = [];
                     docs.forEach((e) => {
                         result.unshift({
@@ -22,7 +23,6 @@ const AdminFeedsPage = ({history}) => {
                     setFeeds(result);
                     setIsLoading(false);
                 }).catch((err) => {
-                    alert(err);
                     setIsLoading(null);
                 });
             }
@@ -33,7 +33,7 @@ const AdminFeedsPage = ({history}) => {
     const handleLogout = () => {
         setIsLoading(true);
         firebase.default.auth().signOut().then((result)=>{
-            window.location = '/';
+            window.location.href = '/';
         }).catch((err)=>{
             setIsLoading(false);
             alert("Error in Logging out!");
@@ -60,4 +60,4 @@ const AdminFeedsPage = ({history}) => {
     );
 }
  
-export default AdminFeedsPage;
+export default FeedsPage;

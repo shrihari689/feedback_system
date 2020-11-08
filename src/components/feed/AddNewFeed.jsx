@@ -43,6 +43,7 @@ const AddNewFeedPage = ({history}) => {
                 title: newFeed.title,
                 desc: newFeed.desc,
                 tags: newFeed.tags,
+                hasImage: newFeed.hasImage,
                 status: 'unsolved',
                 date: firebase.firestore.FieldValue.serverTimestamp(),
                 userName: newFeed.anonymous ? 'Anonymous' : currentUser.displayName,

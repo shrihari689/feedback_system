@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import '../../feeds.css';
 import noDataIllus from '../../assets/noDataIllus.svg';
-import Loader from './../general/loadingPage';
-import AdminFeedItem from './../general/adminFeedItem';
-const AdminHomePageContainer = ({isLoading, onFeedItemClick, feeds}) => {
+import Loader from '../general/loadingPage';
+import AdminFeedItem from '../general/adminFeedItem';
+import { Link } from 'react-router-dom';
+const HomePageContainer = ({isLoading, onFeedItemClick, feeds}) => {
 
     const [currentFilter, setCurrentFilter] = useState('all');
     if(isLoading == null) return <div className="feed__container">Error!</div>;
     if(isLoading) return <Loader></Loader>;
-     
+   
+    
     const filteredFeeds = {
         'all' : feeds,
         'solved' : feeds.filter((e) => e.status === 'solved'),
@@ -22,13 +24,19 @@ const AdminHomePageContainer = ({isLoading, onFeedItemClick, feeds}) => {
     return (
         <div className="feed__container">
             <div className="feed__recentfeeds">
-                <h3>Recent Feeds</h3>
+                <div className="feed__recentHeader">
+                    <h3>My Feeds</h3>
+                    <Link to="/feed/new" className="feed-button"> <i className="fa fa-plus"></i> New Feed</Link>
+                </div>
                 <div className="feed__recentList">
-                    { feeds.map((e,i)=><AdminFeedItem onFeedItemClick={onFeedItemClick} key={i} feed={e} />) }
+                    { feeds.map((e,i) => <AdminFeedItem onFeedItemClick={onFeedItemClick} key={i} feed={e} />) }
                     { feeds.length === 0 ? (
                         <div className="noData__container inside">
-                            <img src={noDataIllus} alt="No Data Found"/>
-                            <h2>No Feeds Found</h2>
+                            <div className="noData__wrapper">
+                                <img src={noDataIllus} alt="No Data Found"/>
+                                <h2>No Feeds Found</h2>
+                                <span>Start a New Feed by tapping on 'New Feed' button!</span>
+                            </div>
                         </div>  
                     ): null}
                 </div>
@@ -80,4 +88,4 @@ const AdminHomePageContainer = ({isLoading, onFeedItemClick, feeds}) => {
     );
 }
  
-export default AdminHomePageContainer;
+export default HomePageContainer;

@@ -21,7 +21,6 @@ const HomeNavBar = ({onLogout}) => {
                     <NavLink to='/help'>Help</NavLink>
                 </ul>
                 <div>
-                    <Link to="/feed/new" className="nav-button">New Feed</Link>    
                     <a href={`mailto:${supportEmail}`} className="nav-button">Support</a>
                     <span onClick={onLogout} className="nav-button">Logout</span>    
                 </div>
@@ -35,7 +34,6 @@ const HomeNavBar = ({onLogout}) => {
                         <NavLink to='/profile'>Profile</NavLink>
                         <NavLink to='/help'>Help</NavLink>
                     </ul>
-                    <Link to="/feed/new" className="sidebar__button">New Feed</Link>    
                     <a href={`mailto:${supportEmail}`} className="sidebar__button">Support</a>
                     <span onClick={onLogout} className="sidebar__button">Logout</span>    
                 </div>

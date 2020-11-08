@@ -1,0 +1,133 @@
+.adminManageUsers__container {
+  width: 90%;
+  margin: 0 auto;
+  background-color: red;
+  margin-top: 65px;
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.adminManageUsers__loader .loader__container {
+  height: 200px;
+}
+.adminManageUsers__loader {
+  height: 250px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.adminManageUsers__usersList {
+  display: flex;
+  flex-direction: column;
+}
+.adminManageUsers__usersList__item {
+  margin: 20px 5px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.adminManageUsers__usersList__item__role .button:hover {
+  background-color: unset;
+  border: 1px solid red;
+}
+.adminManageUsers__usersList__item__role .button {
+  border: 1px solid red;
+  background-color: red;
+}
+.button.green.disabled:hover {
+  background-color: #ddd;
+  border: 1px solid #ddd;
+  color: #aaa;
+}
+.button.green.disabled {
+  background-color: #ddd;
+  border: 1px solid #ddd;
+  color: #aaa;
+  cursor: default;
+}
+.adminManageUsers__usersList__item__role .role__buttons .button {
+  width: 30%;
+  min-width: 100px;
+  margin: 10px auto;
+  text-align: center;
+}
+.adminManageUsers__usersList__item__role .role__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.adminManageUsers__usersList__item__role {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+.button.green:hover {
+  border: 1px solid rgb(0, 225, 0);
+  color: green;
+}
+.button.green {
+  background-color: rgb(0, 225, 0);
+  border: 1px solid rgb(0, 225, 0);
+}
+.adminManageUsers__usersList__item input {
+  padding: 10px;
+  width: 90%;
+  font-size: 1em;
+  margin: 20px auto;
+  border-radius: 5px;
+  border: 1px solid rgba(86, 14, 105, 0.3);
+}
+.adminManageUsers__usersList__item__emails h5 {
+  margin-left: 20px;
+}
+.adminManageUsers__usersList__item__emails div i:hover {
+  background-color: #ddd;
+}
+.adminManageUsers__usersList__item__emails div i {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #eee;
+}
+.adminManageUsers__usersList__item__emails div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.adminManageUsers__usersList__item__emails input.ok {
+  border: 1px solid rgb(0, 225, 0);
+}
+.adminManageUsers__usersList__item__emails input.notok {
+  border: 1px solid rgb(225, 0, 0);
+}
+.adminManageUsers__usersList__item__emails {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 10px;
+}
+.adminManageUsers__usersList__item__emails .button {
+  width: 50%;
+  justify-content: center;
+  margin-top: 10px;
+}
+.adminManageUsers__usersList__item__emails input {
+  margin: 5px auto;
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 500px) {
+  .adminManageUsers__usersList__item {
+    grid-template-rows: 1fr auto;
+    grid-template-columns: auto;
+  }
+  .adminManageUsers__usersList__item input {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
