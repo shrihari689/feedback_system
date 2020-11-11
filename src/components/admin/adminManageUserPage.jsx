@@ -5,7 +5,7 @@ import AdminManageUsersContainer from './adminManageUsersContainer';
 const AdminManageUsers = () => {
     return (
         <React.Fragment>
-            <HomeNavBar></HomeNavBar>
+            <HomeNavBar isAdmin={true}></HomeNavBar>
             <AdminManageUsersContainer  />
         </React.Fragment>
     );

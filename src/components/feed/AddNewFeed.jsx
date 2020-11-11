@@ -8,12 +8,23 @@ const AddNewFeedPage = ({history}) => {
 
     const [isLoading, setIsLoading] = useState(true);    
     const [currentUser, setCurrentUser] = useState();
+    const [tagDepartment, setTagDepartments] = useState([]);
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {
+                const dbRef = firebase.firestore().collection('Settings');
+                dbRef.get().then((result) => {
+                    const roles = [];
+                    result.forEach((doc) => {
+                        roles.push(doc.data().name);
+                    })
+                    setTagDepartments(roles);
+                    setIsLoading(false);
+                }).catch((err) => {
+                    alert('Something Went Wrong!');
+                });
                 setCurrentUser(user);
-                setIsLoading(false);
             }
         });
     },[]);
@@ -24,15 +35,7 @@ const AddNewFeedPage = ({history}) => {
         history.replace('/feeds');
     }
    
-    const handleLogout = () => {
-        setIsLoading(true);
-        firebase.default.auth().signOut().then((result)=>{
-            window.location = '/feeds';
-        }).catch((err)=>{
-            setIsLoading(false);
-            alert("Error in Logging out!");
-        });
-    };
+    
     
     const handleAddNewFeed = (newFeed) => {
         setIsLoading(true);
@@ -50,7 +53,7 @@ const AddNewFeedPage = ({history}) => {
                 userImage: newFeed.anonymous ? anonymousImage : currentUser.photoURL,
                 userId: currentUser.uid 
             }).then((result) => {
-                window.location.href = '/feeds';
+                history.replace('/feeds');        
             }).catch((err)=>{
                 alert("Error in Posting the Feed!\nTry again after sometimes!");
                 setIsLoading(false);
@@ -62,10 +65,11 @@ const AddNewFeedPage = ({history}) => {
 
     return (
         <React.Fragment>
-            <HomeNavBar isLoading={isLoading} onLogout={handleLogout} />
+            <HomeNavBar isLoading={isLoading} />
             <AddNewFeedWrapper
                 onBackButton={handleBackButton}
                 isLoading={isLoading}
+                tags={tagDepartment}
                 onAddNewFeed={handleAddNewFeed}
             />
         </React.Fragment>

@@ -1,15 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Loader from './loadingPage';
 import '../../feedDetails.css';
+import noDataIllus from '../../assets/noDataIllus.svg';
 import { getFormatedDateString } from './../../configs/mainConfigs';
 import FeedComments from '../feed/FeedComments';
+import firebase from 'firebase/app';
+import 'firebase/firebase-firestore';
 
 const FeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onStatusChange}) => {
-    const [newStatus, setNewStatus] = useState('partial') ;
-    const currentFeed = feed;
     
+    const currentFeed = feed;
+    const [feedHistory, setFeedHistory] = useState([]);
+    const [isHistoryLoading, setIsHistoryLoading] = useState(true);
+
+    useEffect(() => {
+        if(currentFeed.feedId){
+            const dbRef = firebase.firestore().collection('Feeds').doc(currentFeed.feedId).collection('History');
+            dbRef.orderBy('timestamp','desc').get().then((docs) => {
+                const histories = [];
+                docs.forEach((doc) => {
+                    histories.push(doc.data());
+                });
+                setFeedHistory(histories);
+                setIsHistoryLoading(false);
+            }).catch((err) => {
+                setIsHistoryLoading(false);
+            });
+        }
+    },[currentFeed]);
+
+
+
     if(isLoading || !currentFeed) return <Loader/>;
     const feedDate = getFormatedDateString(new Date(currentFeed.date.seconds * 1000));
+    
     
     return (   
         <div className="feedDetails__container">
@@ -64,25 +88,31 @@ const FeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onStatusCh
                 </div>
             </div>
             <div className="feedDetails__confirmStatus">
-                <h3>Status</h3>
+                <h3>History</h3>
                 <div className="feedDetails__Wrapper">
-                    <div className="feedDetails__progress">
-                        <div style={{'animationName': currentFeed.status}}>
-                            {currentFeed.status?.toUpperCase()}
-                        </div>
-                    </div>
-                    <div className="feedDetails__changeStatus">
-                        <select defaultValue={currentFeed.status} onChange={({target}) => setNewStatus(target.value)}>
-                            <option value="partial">Partial</option>
-                            <option value="solved">Solved</option>
-                            <option value="rejected">Rejected</option>
-                            <option value="unsolved">Unsolved</option>
-                            <option value="opened">Opened</option>
-                        </select>
-                        <div>
-                            <span onClick={() => onStatusChange(currentFeed.feedId, newStatus)} className="button">Confirm</span>
-                        </div>
-                    </div>
+                    
+                    {
+                        isHistoryLoading ? <Loader /> :
+                        feedHistory.length > 0 ? (
+                            feedHistory.map((historyItem, i) => {
+                                const histDate = getFormatedDateString(new Date(historyItem.timestamp.seconds * 1000));
+
+                                return (
+                                    <div key={i} className="feedDetails__histroy__item">
+                                        <div className="feedDetails__histroy__time">{histDate}</div>
+                                        <span className="feedDetails__histroy__adminName">{historyItem.adminName}</span>
+                                        <span> marked the feed as </span>
+                                        <span className="feedDetails__histroy__status">{historyItem.status.toUpperCase()}</span>
+                                    </div>        
+                                );
+                            })
+                        ):(
+                            <div className="feedDetails__history__noData">
+                                <img src={noDataIllus} alt="No data"/>
+                                <h4>No History Found!</h4>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </div> 

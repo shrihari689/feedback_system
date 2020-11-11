@@ -3,7 +3,7 @@ import '../../help.css';
 import Loader from '../general/loadingPage';
 
 
-const HelpPageContainer = ({ isLoading }) => {
+const AdminHelpPageContainer = ({ isLoading }) => {
 
     const questions = [
         {
@@ -47,4 +47,4 @@ const HelpPageContainer = ({ isLoading }) => {
     );
 }
  
-export default HelpPageContainer;
+export default AdminHelpPageContainer;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import HomeNavBar from '../home/HomeNavBar';
-import HelpPageContainer from './HelpPageContainer';
-const HelpPage = () => {
+import AdminHelpPageContainer from './AdminHelpPageContainer';
+const AdminHelpPage = () => {
 
     const [isLoading, setIsLoading] = useState(true);    
     
@@ -11,10 +11,10 @@ const HelpPage = () => {
 
     return (
         <React.Fragment>
-            <HomeNavBar/>
-            <HelpPageContainer isLoading={isLoading} />
+            <HomeNavBar isAdmin={true}/>
+            <AdminHelpPageContainer isLoading={isLoading} />
         </React.Fragment>
     );
 }
  
-export default HelpPage;
+export default AdminHelpPage;

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import '../../feeds.css';
 import noDataIllus from '../../assets/noDataIllus.svg';
 import Loader from '../general/loadingPage';
-import AdminFeedItem from '../general/adminFeedItem';
 import { Link } from 'react-router-dom';
+import FeedItem from './../general/FeedItem';
 const HomePageContainer = ({isLoading, onFeedItemClick, feeds}) => {
 
     const [currentFilter, setCurrentFilter] = useState('all');
@@ -29,7 +29,7 @@ const HomePageContainer = ({isLoading, onFeedItemClick, feeds}) => {
                     <Link to="/feed/new" className="feed-button"> <i className="fa fa-plus"></i> New Feed</Link>
                 </div>
                 <div className="feed__recentList">
-                    { feeds.map((e,i) => <AdminFeedItem onFeedItemClick={onFeedItemClick} key={i} feed={e} />) }
+                    { feeds.map((e,i) => <FeedItem onFeedItemClick={onFeedItemClick} key={i} feed={e} />) }
                     { feeds.length === 0 ? (
                         <div className="noData__container inside">
                             <div className="noData__wrapper">

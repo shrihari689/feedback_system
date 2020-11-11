@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { backend, getFormatedDateString } from './../../configs/mainConfigs';
-const AdminFeedItem = (props) => {
+import { backendFeedItemImage, getFormatedDateString } from './../../configs/mainConfigs';
+const FeedItem = (props) => {
     const { hasImage, title, tags, status, feedId, date, userName, userImage } = props.feed;
     
     let feedItemStyle = "feed__recentItem ";
@@ -20,7 +20,7 @@ const AdminFeedItem = (props) => {
 
     return (
         <Link to={{
-            pathname: `/admin/feed/${feedId}`,
+            pathname: `/feed/${feedId}`,
             state: props.feed
         }} className={feedItemStyle}>
             <div className="feed__recentItem__details">
@@ -51,10 +51,10 @@ const AdminFeedItem = (props) => {
                 </div>
             </div>
             {hasImage && hasImage.length > 0 ? <div className="feed__recentItem__image">
-                <img src={`http://${backend}:3001/uploads/${hasImage[0]}`} alt="Feed"/>
+                <img src={`${backendFeedItemImage}/${hasImage[0]}`} alt="Feed"/>
             </div>:''}
         </Link>
     );
 }
  
-export default AdminFeedItem;
+export default FeedItem;

@@ -1,0 +1,130 @@
+.updateProfile__container {
+  margin-top: 65px;
+  display: flex;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-image: url("./assets/phoneIllus.svg");
+  background-repeat: no-repeat;
+  background-size: 30vw auto;
+  background-position: 100% 100%;
+}
+.updateProfile__container .loader__container {
+  height: unset;
+}
+.updateProfile__wrapper {
+  width: 60%;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: auto;
+  margin-top: 20px;
+  margin-left: 10%;
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  padding-bottom: 50px;
+}
+.updateProfile__wrapper h2 {
+  margin: 20px;
+}
+.updateProfile__phone {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+}
+.updateProfile__container h4 {
+  margin: 15px 0;
+  margin-left: 20px;
+}
+.updateProfile__phone button {
+  padding: 10px 15px;
+  margin-left: 20px;
+}
+.updateProfile__container input {
+  padding: 10px;
+  outline: none;
+  margin: 0 20px;
+}
+.updateProfile__container select {
+  padding: 10px;
+  margin: 0 20px;
+  outline: none;
+  width: 120px;
+}
+.updateProfile__general input {
+  width: 80%;
+}
+.updateProfile__general {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding-bottom: 10px;
+}
+#recaptcha-container {
+  margin: 10px 20px;
+}
+.info__message {
+  padding: 10px 20px;
+  margin: 10px auto;
+  margin-left: 20px;
+  border-radius: 5px;
+  background-color: #eee;
+}
+.updateProfile__button {
+  width: 50%;
+  text-align: center;
+  padding: 10px;
+  margin: 15px auto;
+}
+.updateProfile__progress {
+  width: 90%;
+  padding: 2px 0;
+  text-align: center;
+  border-radius: 20px;
+  background-color: #eee;
+  margin: 5px auto;
+  position: relative;
+  height: 20px;
+}
+.updateProfile__progress_meter {
+  width: 30%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 0, 0.5);
+}
+
+@media only screen and (max-width: 850px) {
+  .updateProfile__phone button {
+    margin: 10px auto;
+  }
+}
+@media only screen and (max-width: 630px) {
+  .updateProfile__container {
+    background-size: 35vw auto;
+  }
+  .updateProfile__wrapper {
+    margin: auto;
+    margin-top: 20px;
+    width: 75%;
+  }
+  .updateProfile__phone button {
+    margin: 10px auto;
+  }
+
+  .updateProfile__general {
+    grid-template-columns: auto;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .updateProfile__container {
+    background-size: 40vw auto;
+  }
+
+  .updateProfile__wrapper {
+    margin: auto;
+    margin-top: 20px;
+    width: 90%;
+  }
+}

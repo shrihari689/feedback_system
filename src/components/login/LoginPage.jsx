@@ -15,6 +15,7 @@ const LoginPage = ({history}) => {
         const provider = new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({
             'hd': 'bitsathy.ac.in',
+            'prompt': 'select_account'
         });
         firebase.auth().signInWithRedirect(provider).then((result)=>{
             setIsLoading(false);

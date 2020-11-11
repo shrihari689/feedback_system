@@ -43,16 +43,7 @@ const FeedDetailsPage = ({history, match}) => {
         history.goBack();
     }
 
-    const handleLogout = () => {
-        setIsLoading(true);
-        firebase.auth().signOut().then((result)=>{
-            window.location = '/';
-        }).catch((err)=>{
-            setIsLoading(false);
-            alert("Error in Logging out!");
-        });
-    };
-
+    
     
     const handleChangeStatus = (feedId, status) => {
         setIsLoading(true);
@@ -77,7 +68,7 @@ const FeedDetailsPage = ({history, match}) => {
 
     return (
         <React.Fragment>
-            <HomeNavBar onLogout={handleLogout}/>
+            <HomeNavBar />
             <FeedDetailsItem
                 onBackButton={handleBackButton}
                 feed={currentFeed}

@@ -29,16 +29,6 @@ const FeedsPage = ({history}) => {
         });
     },[]);
    
-
-    const handleLogout = () => {
-        setIsLoading(true);
-        firebase.default.auth().signOut().then((result)=>{
-            window.location.href = '/';
-        }).catch((err)=>{
-            setIsLoading(false);
-            alert("Error in Logging out!");
-        });
-    };
     
 
     const handleFeedItemClick = (feedId) => {
@@ -50,7 +40,7 @@ const FeedsPage = ({history}) => {
    
     return (
         <React.Fragment>
-            <HomeNavBar onLogout={handleLogout} />
+            <HomeNavBar />
             <HomePageContainer
                 feeds={feeds}
                 onFeedItemClick={handleFeedItemClick}

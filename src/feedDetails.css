@@ -19,7 +19,34 @@
   padding: 15px 20px;
   min-width: 250px;
 }
+.feedDetails__Wrapper .loader__container {
+  height: unset;
+}
+.feedDetails__histroy__item {
+  margin-bottom: 15px;
+}
+.feedDetails__histroy__time {
+  font-size: 0.8em;
+  color: #888;
+  margin-bottom: 3px;
+}
+.feedDetails__histroy__status {
+  color: var(--lightgreen);
+  font-weight: 600;
+}
+.feedDetails__histroy__adminName {
+  font-weight: 600;
+  color: var(--voilet);
+}
+.feedDetails__history__noData {
+  text-align: center;
+}
 
+.feedDetails__history__noData img {
+  width: 90%;
+  height: 200px;
+  object-fit: cover;
+}
 .feedDetails__Wrapper {
   padding: 30px 20px;
   background: #ffffff;

@@ -14,6 +14,8 @@ export const firebaseConfig = {
 export const backend =
   process.env.NODE_ENV === "development" ? "localhost" : "40.76.248.142";
 
+export const backendFeedItemImage = `http://${backend}:3001/uploads`;
+
 export const getFormatedDateString = (date) => {
   const months = [
     "Jan",
@@ -54,3 +56,26 @@ export const getFormatedDateString = (date) => {
 
 export const anonymousImage =
   "https://firebasestorage.googleapis.com/v0/b/bit-feedback.appspot.com/o/Assets%2FanonymousImage.png?alt=media&token=59de702e-5ed3-4051-9303-a015befe637e";
+
+export const deptNames = {
+  ae: "AERONAUTICAL ENGINEERING",
+  ag: "AGRICULTURE ENGINEERING",
+  ad: "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE",
+  au: "AUTOMOBILE ENGINEERING",
+  bm: "BIOMEDICAL ENGINEERING",
+  bt: "BIOTECHNOLOGY",
+  ce: "CIVIL ENGINEERING",
+  cb: "COMPUTER SCIENCE AND BUSINESS SYSTEMS",
+  cs: "COMPUTER SCIENCE AND ENGINEERING",
+  ct: "COMPUTER TECHNOLOGY",
+  ee: "ELECTRONICS AND ELECTRICAL ENGINEERING",
+  ec: "ELECTRONICS AND COMMUNICATION ENGINEERING",
+  ei: "ELECTRONICS AND INSTRUMENTATION ENGINEERING",
+  ft: "FASHION TECHNOLOGY",
+  fd: "FOOD TECHNOLOGY",
+  ig: "INFORMATION SCIENCE AND ENGINEERING",
+  it: "INFORMATION TECHNOLOGY",
+  me: "MECHANICAL ENGINEERING",
+  mc: "MECHATRONICS",
+  tx: "TEXTILE TECHNOLOGY",
+};

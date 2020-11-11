@@ -6,7 +6,7 @@ import AddNewFeedFileUpload from './fileUpload';
 import { backend } from '../../configs/mainConfigs';
 
 
-const AddNewFeedWrapper = ({onBackButton, onAddNewFeed, isLoading}) => {
+const AddNewFeedWrapper = ({tags, onBackButton, onAddNewFeed, isLoading}) => {
 
     const [files, setFiles] = useState([]);
     const [sources, setSources] = useState([]);
@@ -19,8 +19,7 @@ const AddNewFeedWrapper = ({onBackButton, onAddNewFeed, isLoading}) => {
     });
     const [newFeedTags, setNewFeedTags] = useState([]);
 
-    const tagDepartments = ['Academics', 'Administration', 'Examination', 'Food', 'Hostel', 'Infrastructure', 'Placement', 'Rewards', 'SDC-CAMPS', 'Skills', 'Special Lab', 'Transport'];
-    
+
     
     const handleOnSubmit = () => {
 
@@ -67,7 +66,7 @@ const AddNewFeedWrapper = ({onBackButton, onAddNewFeed, isLoading}) => {
                     alert(response.data);        
                 }
             }).catch((err) => {
-                alert("Client Error: " + err);
+                alert("Client Error: Error in Uploading Images!");
             });
         }else{
             const feedData = {
@@ -113,12 +112,12 @@ const AddNewFeedWrapper = ({onBackButton, onAddNewFeed, isLoading}) => {
                             <span>Tag max. of 2 departments</span>
                             <div className="addNewFeed__form__option">
                                 {
-                                tagDepartments.map((e) => {
+                                tags.map((e) => {
                                     return (
                                         <div key={e} className="addNewFeed__form__option__item">
                                             <input onChange={
                                                 (event) => {
-                                                        setNewFeedTags((prev) => {
+                                                           setNewFeedTags((prev) => {
                                                             const newTags = prev;
                                                             if(event.target.checked){
                                                                 newTags.push(e.toLowerCase());

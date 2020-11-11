@@ -77,7 +77,7 @@ const AdminManageUsersItem = ({role, index, isLoading, onRoleDelete, onRoleSave}
                                     onChange={(event) => {
                                         const {value} = event.target;
                                         const newEmails = [...users];
-                                        newEmails[i] = value.trim();
+                                        newEmails[i] = value.trim().toLowerCase();
                                         setUsers(newEmails);
                                         setIsChanged(true);
                                     }}

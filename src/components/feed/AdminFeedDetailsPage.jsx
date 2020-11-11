@@ -37,20 +37,17 @@ const AdminFeedDetailsPage = ({history, match}) => {
         history.goBack();
     }
 
-    const handleLogout = () => {
-        setIsLoading(true);
-        firebase.auth().signOut().then((result)=>{
-            window.location = '/';
-        }).catch((err)=>{
-            setIsLoading(false);
-            alert("Error in Logging out!");
-        });
-    };
-
+   
+    
     
     const handleChangeStatus = (feedId, status) => {
         setIsLoading(true);
         const dbRef = firebase.firestore().collection('Feeds').doc(feedId);
+        dbRef.collection('History').add({
+            status: status,
+            adminName: currentUser.displayName,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
         dbRef.update({
             status: status
         }).then((result) => {
@@ -64,6 +61,7 @@ const AdminFeedDetailsPage = ({history, match}) => {
                 
             }
         }).catch((err) => {
+            console.log(err);
             alert("Error in Updating the Status!");
             setIsLoading(false);
         });
@@ -71,7 +69,7 @@ const AdminFeedDetailsPage = ({history, match}) => {
 
     return (
         <React.Fragment>
-            <HomeNavBar onLogout={handleLogout}/>
+            <HomeNavBar isAdmin={true} />
             <AdminFeedDetailsItem
                 onBackButton={handleBackButton}
                 feed={currentFeed}
