@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import anonymousImage from '../../assets/anonymousImage.png';
 import { backendFeedItemImage, getFormatedDateString } from './../../configs/mainConfigs';
 const FeedItem = (props) => {
     const { hasImage, title, tags, status, feedId, date, userName, userImage } = props.feed;
@@ -38,7 +39,7 @@ const FeedItem = (props) => {
                     </div>
                 </div>
                 <div className="feed__recentItem__details__profile">
-                    <img src={userImage} alt="Profile"/>
+                    <img src={ userName === 'Anonymous' ? anonymousImage : userImage} alt="Profile"/>
                     <span>{userName}</span>
                 </div>
                 <div className="feed__recentItem__details__more">

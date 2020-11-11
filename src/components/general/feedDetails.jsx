@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Loader from './loadingPage';
 import '../../feedDetails.css';
 import noDataIllus from '../../assets/noDataIllus.svg';
+import anonymousImage from '../../assets/anonymousImage.png';
 import { getFormatedDateString } from './../../configs/mainConfigs';
 import FeedComments from '../feed/FeedComments';
 import firebase from 'firebase/app';
@@ -52,7 +53,9 @@ const FeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onStatusCh
                         {currentFeed.title}
                     </div>
                     <div className="feedDetails__details__profile__item">
-                        <img src={currentFeed.userImage} alt={`${currentFeed.userName} Profile`}/>
+                        <img 
+                        src={ currentFeed.userName === 'Anonymous' ? anonymousImage : currentFeed.userImage}
+                        alt={`${currentFeed.userName} Profile`}/>
                         <span>{currentFeed.userName}</span>
                     </div>
                     <div className="feedDetails__details__more">

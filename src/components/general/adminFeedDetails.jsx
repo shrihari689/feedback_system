@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Loader from './loadingPage';
 import '../../feedDetails.css';
+import anonymousImage from '../../assets/anonymousImage.png';
 import { getFormatedDateString } from './../../configs/mainConfigs';
 import FeedComments from '../feed/FeedComments';
 
@@ -28,7 +29,9 @@ const AdminFeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onSta
                         {currentFeed.title}
                     </div>
                     <div className="feedDetails__details__profile__item">
-                        <img src={currentFeed.userImage} alt={`${currentFeed.userName} Profile`}/>
+                        <img
+                        src={ currentFeed.userName === 'Anonymous' ? anonymousImage : currentFeed.userImage}
+                        alt={`${currentFeed.userName} Profile`}/>
                         <span>{currentFeed.userName}</span>
                     </div>
                     <div className="feedDetails__details__more">
