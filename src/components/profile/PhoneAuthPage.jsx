@@ -92,11 +92,14 @@ const PhoneAuthPage = () => {
 
     if(isLoading) {
         return (
+        <React.Fragment>
+            <HomeNavBar />
             <div className="updateProfile__container">
                 <div className="updateProfile__wrapper">
                     <Loader />
                 </div>
             </div>
+        </React.Fragment>
         );
     }
 

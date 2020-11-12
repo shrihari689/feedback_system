@@ -4,6 +4,7 @@ import '../../feedDetails.css';
 import anonymousImage from '../../assets/anonymousImage.png';
 import { getFormatedDateString } from './../../configs/mainConfigs';
 import FeedComments from '../feed/FeedComments';
+import { Link } from 'react-router-dom';
 
 const AdminFeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onStatusChange}) => {
     const [newStatus, setNewStatus] = useState('partial') ;
@@ -32,7 +33,7 @@ const AdminFeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onSta
                         <img
                         src={ currentFeed.userName === 'Anonymous' ? anonymousImage : currentFeed.userImage}
                         alt={`${currentFeed.userName} Profile`}/>
-                        <span>{currentFeed.userName}</span>
+                        <Link to={`/admin/profile/${currentFeed.userId}`}>{currentFeed.userName}</Link>
                     </div>
                     <div className="feedDetails__details__more">
                         <div className="feedDetails__details__tags">

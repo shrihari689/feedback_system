@@ -1,8 +1,15 @@
 export const supportEmail = "shrihari.ct19@bitsathy.ac.in";
 
+export const superAdmin = "shrihari.ct19@bitsathy.ac.in";
+
+export const sampleAdmins = [
+  "nitharshan.ec19@bitsathy.ac.in",
+  "mohamednowfal.ct19@bitsathy.ac.in",
+];
+
 export const firebaseConfig = {
   apiKey: "AIzaSyB86IL168LpKedM1R-vDXRp4YbhOari6D0",
-  authDomain: "bit-feedback.firebaseapp.com",
+  authDomain: "bit-feedback.web.app",
   databaseURL: "https://bit-feedback.firebaseio.com",
   projectId: "bit-feedback",
   storageBucket: "bit-feedback.appspot.com",

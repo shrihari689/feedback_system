@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firebase-firestore";
-import { firebaseConfig } from "./configs/mainConfigs";
+import { firebaseConfig, sampleAdmins } from "./configs/mainConfigs";
 import LoginPage from "./components/login/LoginPage";
 import AdminFeedsPage from "./components/home/AdminHomePage";
 import AdminFeedDetailsPage from "./components/feed/AdminFeedDetailsPage";
@@ -18,6 +18,7 @@ import ProfilePage from "./components/profile/ProfilePage";
 import UpdateProfilePage from "./components/profile/UpdateProfilePage";
 import PhoneAuthPage from "./components/profile/PhoneAuthPage";
 import HelpPage from "./components/help/HelpPage";
+import AdminProfilePage from "./components/admin/AdminProfilePage";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -53,7 +54,7 @@ const App = () => {
 
   if (
     currentUser != null &&
-    currentUser.email !== "nitharshan.ec19@bitsathy.ac.in" &&
+    !sampleAdmins.includes(currentUser.email) &&
     currentUser.email.replace("@bitsathy.ac.in", "").includes(".")
   ) {
     if (!currentUser.phoneNumber) {
@@ -105,6 +106,7 @@ const App = () => {
             path="/admin/feed/:id"
             component={AdminFeedDetailsPage}
           ></Route>
+          <Route path="/admin/profile/:id" component={AdminProfilePage}></Route>
           <Route path="/admin/help" component={AdminHelpPage}></Route>
           <Route
             path="/admin/manage/users"

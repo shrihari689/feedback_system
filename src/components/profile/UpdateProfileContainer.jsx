@@ -67,6 +67,7 @@ const UpdateProfileContainer = ({user}) => {
         const dbRef = firebase.firestore().collection('Users').doc(userUid);
         dbRef.set({
             userId: userUid,
+            userEmail: user.email,
             userName: user.displayName,
             userImage: user.photoURL,
             userDept: fullDept,
@@ -136,6 +137,8 @@ const UpdateProfileContainer = ({user}) => {
             </div>
         </div>
      );
+    }else{
+        history.replace('/profile/verify');
     }
 }
  

@@ -201,6 +201,10 @@
   margin-bottom: 15px;
   align-items: center;
 }
+.feedDetails__details__profile__item a {
+  text-decoration: none;
+  color: var(--voilet);
+}
 .feedDetails__details__profile__item img {
   margin-right: 10px;
   width: 30px;
@@ -301,7 +305,7 @@
 .feedDetails__comment__input {
   display: flex;
   margin: 10px 0;
-  align-items: center;
+
   justify-content: space-between;
 }
 .feedDetails__comment__button .button {
