@@ -167,6 +167,7 @@
   color: var(--lightblue);
   border-radius: 50%;
   margin-right: 10px;
+  transition: display 1s;
 }
 .feedDetails__changeStatus {
   display: flex;
@@ -204,6 +205,12 @@
 .feedDetails__details__profile__item a {
   text-decoration: none;
   color: var(--voilet);
+}
+.feedDetails__histroy__status.first {
+  background-color: #60bf35;
+  padding: 1px 5px;
+  color: #fff;
+  border-radius: 5px;
 }
 .feedDetails__details__profile__item img {
   margin-right: 10px;
@@ -322,7 +329,9 @@
   display: flex;
   flex-direction: column;
 }
-
+.feedDetails__header i {
+  transition: display 1s;
+}
 .feed__comments__loading .loader__container {
   height: 100px;
 }
@@ -396,6 +405,11 @@
 @media only screen and (max-width: 720px) {
   .feedDetails__confirmStatus {
     flex: 1;
+  }
+}
+@media only screen and (max-width: 750px) {
+  .feedDetails__header i {
+    display: none;
   }
 }
 @media only screen and (max-width: 600px) {

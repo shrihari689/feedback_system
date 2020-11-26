@@ -105,7 +105,7 @@ const FeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onStatusCh
                                         <div className="feedDetails__histroy__time">{histDate}</div>
                                         <span className="feedDetails__histroy__adminName">{historyItem.adminName}</span>
                                         <span> marked the feed as </span>
-                                        <span className="feedDetails__histroy__status">{historyItem.status.toUpperCase()}</span>
+                                        <span className={"feedDetails__histroy__status" + (i === 0 ? ' first' : '')}>{historyItem.status.toUpperCase()}</span>
                                     </div>        
                                 );
                             })

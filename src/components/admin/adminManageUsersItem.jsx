@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import Loader from './../general/loadingPage';
 
 const AdminManageUsersItem = ({role, index, isLoading, onRoleDelete, onRoleSave}) => {
@@ -8,6 +8,8 @@ const AdminManageUsersItem = ({role, index, isLoading, onRoleDelete, onRoleSave}
     const [name, setName] = useState(role.name);
     const {roleId} = role;
 
+    
+    
     const handleAddNewUser = () => {
         if(users.length < 3)
         {
