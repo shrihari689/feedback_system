@@ -87,7 +87,7 @@ const FeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onStatusCh
                 </div>
                 <div className="feedDetails__commentsWrapper">
                     <div className="feedDetails__comments__title">Discussion</div>
-                    <FeedComments currentUser={currentUser} feedId={currentFeed.feedId} />
+                    <FeedComments isAnonymous={currentFeed.userName === 'Anonymous'} currentUser={currentUser} feedId={currentFeed.feedId} />
                 </div>
             </div>
             <div className="feedDetails__confirmStatus">

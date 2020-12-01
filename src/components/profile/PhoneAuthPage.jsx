@@ -42,9 +42,12 @@ const PhoneAuthPage = () => {
         }).catch((err) => {
             if(err.code === 'auth/too-many-requests'){
                 alert("We have blocked all requests from this device due to unusual activity. Try again later.");
-            }else{
+            }else if(err.code === 'auth/captcha-check-failed'){
+                alert("Verification failed!");
+                window.reload();
+            }
+            else{
                 alert("Error in Sending OTP!");
-                console.log(err);
             }
         });        
     };

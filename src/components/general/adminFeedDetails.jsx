@@ -33,7 +33,10 @@ const AdminFeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onSta
                         <img
                         src={ currentFeed.userName === 'Anonymous' ? anonymousImage : currentFeed.userImage}
                         alt={`${currentFeed.userName} Profile`}/>
-                        <Link to={`/admin/profile/${currentFeed.userId}`}>{currentFeed.userName}</Link>
+                        {
+                            currentFeed.userName === 'Anonymous' ? 
+                            <span>{currentFeed.userName}</span> : <Link to={`/admin/profile/${currentFeed.userId}`}>{currentFeed.userName}</Link>
+                        }
                     </div>
                     <div className="feedDetails__details__more">
                         <div className="feedDetails__details__tags">
@@ -64,7 +67,7 @@ const AdminFeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onSta
                 </div>
                 <div className="feedDetails__commentsWrapper">
                     <div className="feedDetails__comments__title">Discussion</div>
-                    <FeedComments currentUser={currentUser} feedId={currentFeed.feedId} />
+                    <FeedComments isAnonymous={currentFeed.userName === 'Anonymous'} currentUser={currentUser} feedId={currentFeed.feedId} />
                 </div>
             </div>
             <div className="feedDetails__confirmStatus">

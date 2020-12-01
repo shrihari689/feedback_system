@@ -47,7 +47,6 @@ const AddNewFeedWrapper = ({tags, onBackButton, onAddNewFeed, isLoading}) => {
         if(files.length > 0){
             const form = new FormData();
             for (const key of Object.keys(files)) {
-                console.log(files[key]);
                 form.append('feed_image', files[key])
             }
             axios.post(`http://${backend}:3001/api/upload`, form).then((response) => {
@@ -137,7 +136,7 @@ const AddNewFeedWrapper = ({tags, onBackButton, onAddNewFeed, isLoading}) => {
                             </div>
                         </div>
                         <div className="addNewFeed__form__item addNewFeed__upload__images">
-                            <label>Related Images</label>
+                            <label>Related Images (Currently on Dev Mode : Backend not connected)</label>
                             <span>Max. of 3 images (Only .jpg and .png files)</span>
                             <AddNewFeedFileUpload
                                 sources={sources}

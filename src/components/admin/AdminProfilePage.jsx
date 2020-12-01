@@ -29,7 +29,7 @@ const AdminProfilePage = ({match}) => {
     if(isLoading){
         return (
             <React.Fragment>        
-                <HomeNavBar />
+                <HomeNavBar isAdmin={true} />
                 <Loader />
             </React.Fragment>
         );

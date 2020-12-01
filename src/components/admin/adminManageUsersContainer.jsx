@@ -17,7 +17,6 @@ const AdminManageUsersContainer = (props) => {
         dbRef.get().then(({docs}) => {
             setIsLoading((prev) => prev.filter((i) => i !== -1));
             const newRoles = docs.map((e) => e.data());
-            console.log(newRoles);
             setRoles(newRoles);
         }).catch((err) => {
             setIsLoading((prev) => prev.filter((i) => i !== -1));

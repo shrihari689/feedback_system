@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import firebase  from 'firebase/app';
 import 'firebase/firebase-firestore';
-import { getFormatedDateString } from './../../configs/mainConfigs';
+import { anonymousImage, getFormatedDateString, sampleAdmins } from './../../configs/mainConfigs';
 import Loader from './../general/loadingPage';
-const FeedComments = ({feedId, currentUser}) => {
+const FeedComments = ({feedId, currentUser, isAnonymous}) => {
     
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const isAdmin = !currentUser.email.replace("@bitsathy.ac.in", "").includes(".") || sampleAdmins.includes(currentUser.email);
+
 
     useEffect(() => {
         const dbRef = firebase.firestore().collection('Feeds').doc(feedId).collection('Comments');
@@ -48,8 +50,8 @@ const FeedComments = ({feedId, currentUser}) => {
             const dbRef = firebase.firestore().collection('Feeds').doc(feedId).collection('Comments');
             dbRef.add({
                 date: firebase.firestore.FieldValue.serverTimestamp(),
-                userName: currentUser.displayName,
-                userImage: currentUser.photoURL,
+                userName: isAdmin ? currentUser.displayName : isAnonymous ? 'Anonymous' : currentUser.displayName,
+                userImage: isAdmin? currentUser.photoURL : isAnonymous ? anonymousImage : currentUser.photoURL,
                 userId: currentUser.uid,
                 message: newCommentValue
             }).then((res) => {

@@ -95,8 +95,9 @@ const App = () => {
   }
 
   if (
-    currentUser != null &&
-    currentUser.email.replace("@bitsathy.ac.in", "").includes(".")
+    (currentUser != null &&
+      !currentUser.email.replace("@bitsathy.ac.in", "").includes(".")) ||
+    sampleAdmins.includes(currentUser.email)
   ) {
     return (
       <React.Fragment>
@@ -117,6 +118,8 @@ const App = () => {
       </React.Fragment>
     );
   }
+
+  return <div>Server Error!</div>;
 };
 
 export default App;

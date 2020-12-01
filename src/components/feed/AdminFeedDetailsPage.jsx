@@ -61,7 +61,6 @@ const AdminFeedDetailsPage = ({history, match}) => {
                 
             }
         }).catch((err) => {
-            console.log(err);
             alert("Error in Updating the Status!");
             setIsLoading(false);
         });

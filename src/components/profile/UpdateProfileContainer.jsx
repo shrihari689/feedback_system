@@ -5,7 +5,8 @@ import  firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firebase-firestore';
 import Loader from './../general/loadingPage';
-import { useHistory } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
+import PhoneAuthPage from './PhoneAuthPage';
 const UpdateProfileContainer = ({user}) => {
 
     const history = useHistory();
@@ -33,9 +34,8 @@ const UpdateProfileContainer = ({user}) => {
 
         const dbRef = firebase.firestore().collection('Users').doc(userUid);
         dbRef.get().then((result) => {
-            setIsLoading(false);
             if(result.exists) {
-                history.replace('/profile/verify')        
+                history.replace('/profile/verify');        
             }else{
                 setIsFirstPartDone(false);
                 setIsLoading(false);
@@ -74,8 +74,7 @@ const UpdateProfileContainer = ({user}) => {
             userYear: year,
             userRollNo: rollNo,
         }).then((result) => {
-            setIsLoading(false);
-            setIsFirstPartDone(true);
+            history.replace('/profile/verify');        
         }).catch((err) => {
             alert('Error in updating the Profile!');
             setIsLoading(false);
@@ -138,7 +137,7 @@ const UpdateProfileContainer = ({user}) => {
         </div>
      );
     }else{
-        history.replace('/profile/verify');
+        return <Route path="/profile/verify" component={PhoneAuthPage}></Route>;
     }
 }
  
