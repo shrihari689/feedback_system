@@ -3,7 +3,6 @@ import Loader from './loadingPage';
 import '../../addNewFeed.css';
 import axios from 'axios';
 import AddNewFeedFileUpload from './fileUpload';
-import { backend } from '../../configs/mainConfigs';
 
 
 const AddNewFeedWrapper = ({tags, onBackButton, onAddNewFeed, isLoading}) => {
@@ -49,7 +48,7 @@ const AddNewFeedWrapper = ({tags, onBackButton, onAddNewFeed, isLoading}) => {
             for (const key of Object.keys(files)) {
                 form.append('feed_image', files[key])
             }
-            axios.post(`http://${backend}:3001/api/upload`, form).then((response) => {
+            axios.post(`/api/upload`, form).then((response) => {
                 if(response.status === 201){
                     const imageData = [];
                     response.data.forEach((image) => {
@@ -136,7 +135,7 @@ const AddNewFeedWrapper = ({tags, onBackButton, onAddNewFeed, isLoading}) => {
                             </div>
                         </div>
                         <div className="addNewFeed__form__item addNewFeed__upload__images">
-                            <label>Related Images (Currently on Dev Mode : Backend not connected)</label>
+                            <label>Related Images</label>
                             <span>Max. of 3 images (Only .jpg and .png files)</span>
                             <AddNewFeedFileUpload
                                 sources={sources}

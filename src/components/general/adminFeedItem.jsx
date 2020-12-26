@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import anonymousImage from '../../assets/anonymousImage.png';
-import { backend, getFormatedDateString } from './../../configs/mainConfigs';
+import { getFormatedDateString } from './../../configs/mainConfigs';
 const AdminFeedItem = (props) => {
     const { hasImage, title, tags, status, feedId, date, userName, userImage } = props.feed;
     
@@ -52,7 +52,7 @@ const AdminFeedItem = (props) => {
                 </div>
             </div>
             {hasImage && hasImage.length > 0 ? <div className="feed__recentItem__image">
-                <img src={`http://${backend}:3001/uploads/${hasImage[0]}`} alt="Feed"/>
+                <img src={`/uploads/${hasImage[0]}`} alt="Feed"/>
             </div>:''}
         </Link>
     );

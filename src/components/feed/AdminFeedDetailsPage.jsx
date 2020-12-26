@@ -4,7 +4,7 @@ import HomeNavBar from '../home/HomeNavBar';
 import firebase  from 'firebase/app';
 import 'firebase/firebase-firestore';
 
-const AdminFeedDetailsPage = ({history, match}) => {
+const AdminFeedDetailsPage = ({history, match, user}) => {
     const [isLoading, setIsLoading] = useState(true);  
     const [currentFeed, setCurrentFeed] = useState({});
     const [currentUser, setCurrentUser] = useState({});
@@ -68,7 +68,7 @@ const AdminFeedDetailsPage = ({history, match}) => {
 
     return (
         <React.Fragment>
-            <HomeNavBar isAdmin={true} />
+            <HomeNavBar isAdmin={true} user={user} />
             <AdminFeedDetailsItem
                 onBackButton={handleBackButton}
                 feed={currentFeed}

@@ -4,8 +4,9 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firebase-firestore";
-import { firebaseConfig, sampleAdmins } from "./configs/mainConfigs";
+import { firebaseConfig, isSuperAdmin } from "./configs/mainConfigs";
 import LoginPage from "./components/login/LoginPage";
+import AdminLoginPage from "./components/login/AdminLoginPage";
 import AdminFeedsPage from "./components/home/AdminHomePage";
 import AdminFeedDetailsPage from "./components/feed/AdminFeedDetailsPage";
 import AdminHelpPage from "./components/help/AdminHelpPage";
@@ -30,6 +31,12 @@ const App = () => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user != null) {
+        if(isSuperAdmin(user) && !user.displayName) {
+          user.updateProfile({
+            displayName: "Feedback Admin",
+            photoURL: "/favicon.png"
+          });
+        }
         setCurrentUser(user);
       } else {
         setCurrentUser(false);
@@ -46,6 +53,7 @@ const App = () => {
       <React.Fragment>
         <Switch>
           <Route path="/login" component={LoginPage}></Route>
+          <Route path="/admin/login" component={AdminLoginPage}></Route>
           <Redirect from="/" to="/login" />
         </Switch>
       </React.Fragment>
@@ -54,8 +62,8 @@ const App = () => {
 
   if (
     currentUser != null &&
-    !sampleAdmins.includes(currentUser.email) &&
-    currentUser.email.replace("@bitsathy.ac.in", "").includes(".")
+    currentUser.email.replace("@bitsathy.ac.in", "").includes(".") &&
+    currentUser.email !== "shrihari.ct19@bitsathy.ac.in"
   ) {
     if (!currentUser.phoneNumber) {
       return (
@@ -94,10 +102,48 @@ const App = () => {
     }
   }
 
+
+  
+  if (isSuperAdmin(currentUser)) {
+    return (
+      <React.Fragment>
+        <Switch>
+          <Route
+            path="/admin/feeds"
+            render={(props) => <AdminFeedsPage user={currentUser} {...props} />}
+          ></Route>
+          <Route
+            path="/admin/feed/:id"
+            render={(props) => (
+              <AdminFeedDetailsPage user={currentUser} {...props} />
+            )}
+          ></Route>
+          <Route
+            render={(props) => (
+              <AdminProfilePage user={currentUser} {...props} />
+            )}
+            path="/admin/profile/:id"
+          ></Route>
+          <Route
+            render={(props) => <AdminHelpPage user={currentUser} {...props} />}
+            path="/admin/help"
+          ></Route>
+          <Route
+            path="/admin/manage/users"
+            render={(props) => (
+              <AdminManageUsers user={currentUser} {...props} />
+            )}
+          ></Route>
+          <Redirect from="/" to="/admin/feeds" />
+        </Switch>
+      </React.Fragment>
+    );
+  }
+
   if (
     (currentUser != null &&
       !currentUser.email.replace("@bitsathy.ac.in", "").includes(".")) ||
-    sampleAdmins.includes(currentUser.email)
+    currentUser.email === "shrihari.ct19@bitsathy.ac.in"
   ) {
     return (
       <React.Fragment>
@@ -109,17 +155,13 @@ const App = () => {
           ></Route>
           <Route path="/admin/profile/:id" component={AdminProfilePage}></Route>
           <Route path="/admin/help" component={AdminHelpPage}></Route>
-          <Route
-            path="/admin/manage/users"
-            component={AdminManageUsers}
-          ></Route>
           <Redirect from="/" to="/admin/feeds" />
         </Switch>
       </React.Fragment>
     );
   }
 
-  return <div>Server Error!</div>;
+  return <h2>Server Error!</h2>;
 };
 
 export default App;

@@ -16,7 +16,7 @@ const AdminHelpPageContainer = ({ isLoading }) => {
         },
         {
             question : "I find the duplicate queries",
-            answer: "<TO DO>"
+            answer: "If you find the duplicate queries, kindly reject with a comment!"
         },
         {
             question : "Why I can't see other department's feeds?",

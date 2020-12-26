@@ -1,11 +1,8 @@
-export const supportEmail = "shrihari.ct19@bitsathy.ac.in";
+export const supportEmail = "stayahead@bitsathy.ac.in";
 
-export const superAdmin = "shrihari.ct19@bitsathy.ac.in";
-
-export const sampleAdmins = [
-  "nitharshan.ec19@bitsathy.ac.in",
-  "mohamednowfal.ct19@bitsathy.ac.in",
-];
+export const isSuperAdmin = function (user) {
+  return ((user && user != null) && (user.providerData[0]?.providerId === 'password'));
+}
 
 export const firebaseConfig = {
   apiKey: "AIzaSyB86IL168LpKedM1R-vDXRp4YbhOari6D0",
@@ -18,10 +15,7 @@ export const firebaseConfig = {
   measurementId: "G-LTYF1LQMRB",
 };
 
-export const backend =
-  process.env.NODE_ENV === "development" ? "localhost" : "40.76.248.142";
 
-export const backendFeedItemImage = `http://${backend}:3001/uploads`;
 
 export const getFormatedDateString = (date) => {
   const months = [

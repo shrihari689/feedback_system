@@ -72,7 +72,7 @@ const FeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onStatusCh
                                 {
                                     currentFeed.hasImage.map((image, i) => {
                                         return (
-                                            <img key={i} src={`http://localhost:3001/uploads/${image}`} 
+                                            <img key={i} src={`/uploads/${image}`} 
                                                 alt={`${currentFeed.title} Reference`}/>
                                         );
                                     })

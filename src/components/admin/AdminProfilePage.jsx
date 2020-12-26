@@ -6,7 +6,7 @@ import  firebase  from 'firebase/app';
 import 'firebase/firebase-firestore';
 import { useHistory } from 'react-router-dom';
 
-const AdminProfilePage = ({match}) => {
+const AdminProfilePage = ({match, user}) => {
     
     const [isLoading, setIsLoading] = useState(true);
     const [userData, setUserData] = useState({});
@@ -29,7 +29,7 @@ const AdminProfilePage = ({match}) => {
     if(isLoading){
         return (
             <React.Fragment>        
-                <HomeNavBar isAdmin={true} />
+                <HomeNavBar isAdmin={true} user={user} />
                 <Loader />
             </React.Fragment>
         );

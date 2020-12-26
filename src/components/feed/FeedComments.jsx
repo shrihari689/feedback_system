@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import firebase  from 'firebase/app';
 import 'firebase/firebase-firestore';
-import { anonymousImage, getFormatedDateString, sampleAdmins } from './../../configs/mainConfigs';
+import { anonymousImage, getFormatedDateString, isSuperAdmin } from './../../configs/mainConfigs';
 import Loader from './../general/loadingPage';
 const FeedComments = ({feedId, currentUser, isAnonymous}) => {
     
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
     const [isLoading, setIsLoading] = useState(true);
-    const isAdmin = !currentUser.email.replace("@bitsathy.ac.in", "").includes(".") || sampleAdmins.includes(currentUser.email);
+    const isAdmin = !currentUser.email.replace("@bitsathy.ac.in", "").includes(".") || isSuperAdmin(currentUser) ;
 
 
     useEffect(() => {

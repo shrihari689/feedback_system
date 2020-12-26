@@ -21,7 +21,7 @@ const UpdateProfileContainer = ({user}) => {
     const fullName = user.displayName;
     const userNameInEmail = user.email.replace('bitsathy.ac.in',''); 
     const shortDept = userNameInEmail.substr(userNameInEmail.lastIndexOf('.') + 1,2);
-    const fullDept = deptNames[shortDept] ? deptNames[shortDept] : '';
+    const [fullDept, setFullDept] = useState((deptNames[shortDept] ? deptNames[shortDept] : ''));
     const shortYear = userNameInEmail.substr(userNameInEmail.lastIndexOf('&') - 2,2);
     const fullRollNo = shortYear + 'X' + shortDept.toUpperCase() + 'XXX';
     const sampleYears = ['I', 'II', 'III', 'IV', 'PASSED OUT'];
@@ -70,7 +70,7 @@ const UpdateProfileContainer = ({user}) => {
             userEmail: user.email,
             userName: user.displayName,
             userImage: user.photoURL,
-            userDept: fullDept,
+            userDept: fullDept.trim().toUpperCase(),
             userYear: year,
             userRollNo: rollNo,
         }).then((result) => {
@@ -129,7 +129,11 @@ const UpdateProfileContainer = ({user}) => {
                     </div>                    
                     <div>
                         <h4>Department</h4>
-                        <input type="text" defaultValue={fullDept} disabled readOnly />
+                        {
+                            fullDept === '' ?
+                            <input type="text" onChange={({target}) => setFullDept(target.value)} /> : 
+                            <input type="text" defaultValue={fullDept} disabled readOnly />
+                        }
                     </div>
                 </div>
                 <div className="button updateProfile__button" onClick={handleFirstPartSubmit}>Update Profile</div>

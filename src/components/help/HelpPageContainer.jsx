@@ -14,14 +14,6 @@ const HelpPageContainer = ({ isLoading }) => {
             question : "Is there any stages for the feed?",
             answer: "There are five different stages namely,\n'Unsolved' - Once the Feed is Posted\n'Opened' - Once the respective department has seen the feed\n'Partial' - Once the issue / query is started being processed\n'Solved' - If the issue / query is solved\n'Rejected' - If a feed contains inappropriate information and not subjected to the guidelines"
         },
-        {
-            question : "I find the duplicate queries",
-            answer: "<TO DO>"
-        },
-        {
-            question : "Why I can't see other department's feeds?",
-            answer: "That is because the admin must have not given you the rights! Contact the support team!"
-        },
     ];
 
     if(isLoading) return <Loader />;
