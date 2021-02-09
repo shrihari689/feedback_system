@@ -201,3 +201,39 @@ nav .mobile-menu {
     margin: 0 auto;
   }
 }
+.alert{
+  width: 80%;
+  margin: 0 auto;
+  background-color: orangered;
+  padding: 20px 40px;
+  color: white;
+  border-radius: 10px;
+  margin-top: 65px;
+}
+.alert strong{
+  color: yellow;
+}
+.wrongEmailContainer{
+  width: 80%;
+  text-align: center;
+  margin: 20px auto;
+}
+.wrongEmailContainer .nav-button {
+  outline: none;
+  padding: 5px 15px;
+  background: var(--voilet);
+  color: white;
+  margin: 20px auto;
+  text-decoration: none;
+  border: 1px solid var(--voilet);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-family: "Source Sans Pro", sans-serif;
+  transition: 0.2s;
+}
+
+.wrongEmailContainer .nav-button:hover {
+  color: var(--voilet);
+  background: white;
+}

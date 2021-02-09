@@ -46,6 +46,9 @@ const AdminFeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onSta
                             <span>{feedDate}</span>
                         </div>
                     </div>
+                    <div className="feedDetails__details__desc">
+                        {currentFeed.desc.split('\n').map((line,i) => <p key={i}>{line}</p>)}
+                    </div>
                     { currentFeed.hasImage && (currentFeed.hasImage.length > 0) ?
                         (
                             <div className="feedDetails__details__image">
@@ -61,9 +64,7 @@ const AdminFeedDetailsItem = ({feed, currentUser, isLoading, onBackButton, onSta
                         ):
                         null
                     }
-                    <div className="feedDetails__details__desc">
-                        {currentFeed.desc.split('\n').map((line,i) => <p key={i}>{line}</p>)}
-                    </div>
+                    
                 </div>
                 <div className="feedDetails__commentsWrapper">
                     <div className="feedDetails__comments__title">Discussion</div>

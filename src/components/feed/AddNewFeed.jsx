@@ -4,7 +4,7 @@ import firebase from 'firebase/app';
 import 'firebase/firebase-firestore';
 import AddNewFeedWrapper from '../general/addNewFeedWrapper';
 import { anonymousImage } from '../../configs/mainConfigs';
-const AddNewFeedPage = ({history}) => {
+const AddNewFeedPage = ({history, isAdmin}) => {
 
     const [isLoading, setIsLoading] = useState(true);    
     const [currentUser, setCurrentUser] = useState();
@@ -65,7 +65,7 @@ const AddNewFeedPage = ({history}) => {
 
     return (
         <React.Fragment>
-            <HomeNavBar isLoading={isLoading} />
+            <HomeNavBar isLoading={isLoading} isAdmin={isAdmin} />
             <AddNewFeedWrapper
                 onBackButton={handleBackButton}
                 isLoading={isLoading}

@@ -47,7 +47,7 @@ const ProfilePage = ({currentUser}) => {
                         {userData.userRollNo}
                     </div>
                     <div className="profilePage__dept">
-                        <i class="fa fa-building"></i>
+                        <i className="fa fa-building"></i>
                         <span>{userData.userDept}</span>
                     </div>
                 </div>

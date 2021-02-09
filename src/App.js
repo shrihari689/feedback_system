@@ -20,6 +20,8 @@ import UpdateProfilePage from "./components/profile/UpdateProfilePage";
 import PhoneAuthPage from "./components/profile/PhoneAuthPage";
 import HelpPage from "./components/help/HelpPage";
 import AdminProfilePage from "./components/admin/AdminProfilePage";
+import WrongMail from './components/general/WrongMail';
+import AdminMyFeedsPage from './components/admin/AdminMyFeeds';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -59,12 +61,23 @@ const App = () => {
       </React.Fragment>
     );
   }
+  if (currentUser != null && !currentUser.email.toLowerCase().endsWith('@bitsathy.ac.in')) {    
+    return (
+      <React.Fragment>
+        <Switch>
+          <Route path="/login/wrong_email" render={(props) => <WrongMail {...props} user={currentUser} />}></Route>
+          <Redirect from="/" to="login/wrong_email" />
+        </Switch>
+      </React.Fragment>
+    );
+  }
+
+
 
   if (
     currentUser != null &&
-    currentUser.email.replace("@bitsathy.ac.in", "").includes(".") &&
-    currentUser.email !== "shrihari.ct19@bitsathy.ac.in"
-  ) {
+    currentUser.email.replace("@bitsathy.ac.in", "").includes(".") 
+    ) {
     if (!currentUser.phoneNumber) {
       return (
         <React.Fragment>
@@ -101,10 +114,8 @@ const App = () => {
       );
     }
   }
-
-
   
-  if (isSuperAdmin(currentUser)) {
+  if ( isSuperAdmin(currentUser)) {
     return (
       <React.Fragment>
         <Switch>
@@ -142,18 +153,28 @@ const App = () => {
 
   if (
     (currentUser != null &&
-      !currentUser.email.replace("@bitsathy.ac.in", "").includes(".")) ||
-    currentUser.email === "shrihari.ct19@bitsathy.ac.in"
-  ) {
+      !currentUser.email.replace("@bitsathy.ac.in", "").includes("."))  
+    ) {
     return (
       <React.Fragment>
         <Switch>
           <Route path="/admin/feeds" component={AdminFeedsPage}></Route>
+          
+          <Route
+            path="/admin/myfeeds"
+            render={(props) => <AdminMyFeedsPage user={currentUser} {...props} />}
+          ></Route>
           <Route
             path="/admin/feed/:id"
             component={AdminFeedDetailsPage}
           ></Route>
           <Route path="/admin/profile/:id" component={AdminProfilePage}></Route>
+          <Route path="/feed/new" 
+            render={(props) => <AddNewFeedPage isAdmin={true} user={currentUser} {...props} />}
+            exact></Route>
+          <Route path="/feed/:id" 
+            render={(props) => <FeedDetailsPage isAdmin={true} user={currentUser} {...props} />}
+          ></Route>
           <Route path="/admin/help" component={AdminHelpPage}></Route>
           <Redirect from="/" to="/admin/feeds" />
         </Switch>

@@ -4,7 +4,7 @@ import firebase  from 'firebase/app';
 import 'firebase/firebase-firestore';
 import FeedDetailsItem from './../general/feedDetails';
 
-const FeedDetailsPage = ({history, match}) => {
+const FeedDetailsPage = ({history, match, isAdmin}) => {
     const [isLoading, setIsLoading] = useState(true);  
     const [currentFeed, setCurrentFeed] = useState({});
     const [currentUser, setCurrentUser] = useState({});
@@ -68,7 +68,7 @@ const FeedDetailsPage = ({history, match}) => {
 
     return (
         <React.Fragment>
-            <HomeNavBar />
+            <HomeNavBar isAdmin={isAdmin} />
             <FeedDetailsItem
                 onBackButton={handleBackButton}
                 feed={currentFeed}

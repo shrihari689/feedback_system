@@ -1,12 +1,10 @@
 import bitLogo from "../../assets/bitLogo.png";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { Link, NavLink } from "react-router-dom";
 import { isSuperAdmin, supportEmail } from "./../../configs/mainConfigs";
 const HomeNavBar = ({ isAdmin, user }) => {
-
-
   const handleSideBar = () => {
     const sidenav = document.getElementById("sidebar");
     sidenav.classList.toggle("open");
@@ -22,7 +20,6 @@ const HomeNavBar = ({ isAdmin, user }) => {
         alert("Error in Logging out!");
       });
   };
-
 
   if (user && isSuperAdmin(user)) {
     return (
@@ -85,6 +82,7 @@ const HomeNavBar = ({ isAdmin, user }) => {
           </Link>
           <ul>
             <NavLink to="/admin/feeds">Feeds</NavLink>
+            <NavLink to="/admin/myfeeds">Personal</NavLink>
             <NavLink to="/admin/help">Help</NavLink>
           </ul>
           <div>
@@ -102,6 +100,7 @@ const HomeNavBar = ({ isAdmin, user }) => {
           <div className="sidebar__container">
             <ul onClick={handleSideBar}>
               <NavLink to="/admin/feeds">Feeds</NavLink>
+              <NavLink to="/admin/myfeeds">Personal</NavLink>
               <NavLink to="/admin/help">Help</NavLink>
             </ul>
             <a href={`mailto:${supportEmail}`} className="sidebar__button">

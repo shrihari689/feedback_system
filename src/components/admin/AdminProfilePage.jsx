@@ -17,13 +17,16 @@ const AdminProfilePage = ({match, user}) => {
     useEffect(() => {
         const dbRef = firebase.firestore().collection('Users').doc(userId);
         dbRef.get().then((result) => {
-            setUserData(result.data());
-            setIsLoading(false);
+            if(result.exists) {
+                setUserData(result.data());
+                setIsLoading(false);
+            }else{
+                history.replace('/');
+            }
         }).catch((err) => {
             alert("Error in Getting the Details!");
-            history.goBack();
+            history.replace('/');
         });
-
     }, [userId, history]);
     
     if(isLoading){

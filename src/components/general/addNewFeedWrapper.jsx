@@ -9,7 +9,7 @@ const AddNewFeedWrapper = ({tags, onBackButton, onAddNewFeed, isLoading}) => {
 
     const [files, setFiles] = useState([]);
     const [sources, setSources] = useState([]);
-
+    const [isUploading, setIsUploading] = useState(false);
     const [addNewFeedData, setAddNewFeedData] = useState({
         title: '',
         desc: '',
@@ -42,8 +42,9 @@ const AddNewFeedWrapper = ({tags, onBackButton, onAddNewFeed, isLoading}) => {
             alert("Oops! You didn't agree to terms!")
             return;
         }
-        
+
         if(files.length > 0){
+            setIsUploading(true);
             const form = new FormData();
             for (const key of Object.keys(files)) {
                 form.append('feed_image', files[key])
@@ -76,7 +77,8 @@ const AddNewFeedWrapper = ({tags, onBackButton, onAddNewFeed, isLoading}) => {
         }
     };
 
-    if(isLoading) return <Loader />;
+
+    if(isUploading || isLoading) return <Loader />;
 
     return (
         <div className="addNewFeed__container">
