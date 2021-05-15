@@ -15,7 +15,7 @@ const HomeNavBar = ({ isAdmin, user }) => {
     firebase
       .auth()
       .signOut()
-      .then((result) => {})
+      .then((result) => { })
       .catch((err) => {
         alert("Error in Logging out!");
       });
@@ -35,6 +35,7 @@ const HomeNavBar = ({ isAdmin, user }) => {
           </Link>
           <ul>
             <NavLink to="/admin/feeds">Feeds</NavLink>
+            <NavLink to="/admin/report">Report</NavLink>
             <NavLink to="/admin/manage/users">Settings</NavLink>
             <NavLink to="/admin/help">Help</NavLink>
           </ul>
@@ -53,6 +54,7 @@ const HomeNavBar = ({ isAdmin, user }) => {
           <div className="sidebar__container">
             <ul onClick={handleSideBar}>
               <NavLink to="/admin/feeds">Feeds</NavLink>
+              <NavLink to="/admin/report">Report</NavLink>
               <NavLink to="/admin/manage/users">Settings</NavLink>
               <NavLink to="/admin/help">Help</NavLink>
             </ul>
