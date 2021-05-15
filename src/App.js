@@ -11,6 +11,7 @@ import AdminFeedsPage from "./components/home/AdminHomePage";
 import AdminFeedDetailsPage from "./components/feed/AdminFeedDetailsPage";
 import AdminHelpPage from "./components/help/AdminHelpPage";
 import AdminManageUsers from "./components/admin/adminManageUserPage";
+import AdminReportPage from "./components/admin/adminReportPage";
 import Loader from "./components/general/loadingPage";
 import AddNewFeedPage from "./components/feed/AddNewFeed";
 import FeedsPage from "./components/home/HomePage";
@@ -33,7 +34,7 @@ const App = () => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user != null) {
-        if(isSuperAdmin(user) && !user.displayName) {
+        if (isSuperAdmin(user) && !user.displayName) {
           user.updateProfile({
             displayName: "Feedback Admin",
             photoURL: "/favicon.png"
@@ -61,7 +62,7 @@ const App = () => {
       </React.Fragment>
     );
   }
-  if (currentUser != null && !currentUser.email.toLowerCase().endsWith('@bitsathy.ac.in')) {    
+  if (currentUser != null && !currentUser.email.toLowerCase().endsWith('@bitsathy.ac.in')) {
     return (
       <React.Fragment>
         <Switch>
@@ -76,8 +77,8 @@ const App = () => {
 
   if (
     currentUser != null &&
-    currentUser.email.replace("@bitsathy.ac.in", "").includes(".") 
-    ) {
+    currentUser.email.replace("@bitsathy.ac.in", "").includes(".")
+  ) {
     if (!currentUser.phoneNumber) {
       return (
         <React.Fragment>
@@ -114,8 +115,8 @@ const App = () => {
       );
     }
   }
-  
-  if ( isSuperAdmin(currentUser)) {
+
+  if (isSuperAdmin(currentUser)) {
     return (
       <React.Fragment>
         <Switch>
@@ -136,6 +137,12 @@ const App = () => {
             path="/admin/profile/:id"
           ></Route>
           <Route
+            render={(props) => (
+              <AdminReportPage user={currentUser} {...props} />
+            )}
+            path="/admin/report"
+          ></Route>
+          <Route
             render={(props) => <AdminHelpPage user={currentUser} {...props} />}
             path="/admin/help"
           ></Route>
@@ -153,13 +160,13 @@ const App = () => {
 
   if (
     (currentUser != null &&
-      !currentUser.email.replace("@bitsathy.ac.in", "").includes("."))  
-    ) {
+      !currentUser.email.replace("@bitsathy.ac.in", "").includes("."))
+  ) {
     return (
       <React.Fragment>
         <Switch>
           <Route path="/admin/feeds" component={AdminFeedsPage}></Route>
-          
+
           <Route
             path="/admin/myfeeds"
             render={(props) => <AdminMyFeedsPage user={currentUser} {...props} />}
@@ -169,10 +176,10 @@ const App = () => {
             component={AdminFeedDetailsPage}
           ></Route>
           <Route path="/admin/profile/:id" component={AdminProfilePage}></Route>
-          <Route path="/feed/new" 
+          <Route path="/feed/new"
             render={(props) => <AddNewFeedPage isAdmin={true} user={currentUser} {...props} />}
             exact></Route>
-          <Route path="/feed/:id" 
+          <Route path="/feed/:id"
             render={(props) => <FeedDetailsPage isAdmin={true} user={currentUser} {...props} />}
           ></Route>
           <Route path="/admin/help" component={AdminHelpPage}></Route>

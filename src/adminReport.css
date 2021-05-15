@@ -1,0 +1,77 @@
+.Admin__ReportPage {
+  margin-top: 30px;
+  padding: 5%;
+}
+.Admin__ReportDashboard {
+  padding-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.Admin_ReportCard {
+  width: 30%;
+  margin: 10px auto;
+  background-color: #eee;
+  min-height: 120px;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 1.3rem;
+  align-items: center;
+}
+.Admin_ReportCard_Count {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.Admin_ReportCard.blue {
+  background: #4e54c8;
+  color: white;
+}
+
+.Admin_ReportCard.red {
+  background: #b8420c;
+  color: white;
+}
+.Admin_ReportCard.light_red {
+  background: #f55307;
+  color: white;
+}
+.Admin_ReportCard.orange {
+  background: orange;
+  color: #111;
+}
+
+.Admin_ReportCard:hover {
+  box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.1);
+}
+
+.Admin__ReportHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Admin_ReportButton {
+  outline: none;
+  padding: 5px 15px;
+  background: var(--voilet);
+  color: white;
+  text-decoration: none;
+  border: 1px solid var(--voilet);
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Source Sans Pro", sans-serif;
+  transition: 0.2s;
+}
+@media only screen and (max-width: 600px) {
+  .Admin_ReportCard {
+    width: 100%;
+  }
+}
+@media print {
+  @page {
+    size: portrait;
+  }
+}
